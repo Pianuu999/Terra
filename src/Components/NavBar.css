@@ -1,0 +1,19 @@
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.nav_link {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    font-family: 'PretendardVariable', sans-serif;
+    font-size: 19px;
+    font-weight: 500;
+}
+
+.logo {
+    margin: 8px 20px 10px;
+}
