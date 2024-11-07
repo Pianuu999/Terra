@@ -1,80 +1,168 @@
-import React, { useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import areaJson from './seoul116_place1.json';
 
-mapboxgl.accessToken = 'pk.eyJ1Ijoia2diNDg1NCIsImEiOiJjbTJ3djA1aWwwM2E3MnFwaG01ZHdjdnY4In0.bAzZr4Rw_6EVo0auRt7ubQ'; // 여기에 Mapbox 토큰을 입력하세요
+mapboxgl.accessToken = 'pk.eyJ1Ijoia2diNDg1NCIsImEiOiJjbTJ1NDlmZ2YwOWljMmtvaWltZjFlZXdkIn0.aLnwIt7wXc7ir6vjkogdnQ';
 
-// MapComponent 함수형 컴포넌트 정의
-const MapComponent = () => {
-    // mapContainer는 지도 DOM 요소를 참조하기 위한 Ref
-    const mapContainer = useRef(null);
-    // Mapbox 스타일을 관리하기 위한 상태, 초기값으로 지정한 스타일 사용
-    const [mapStyle] = useState('mapbox://styles/kgb4854/cm2xeuvps002q01oj8wpfham3');
-  
-    useEffect(() => {
-      // Mapbox GL JS로 새로운 지도 인스턴스 생성
-      const map = new mapboxgl.Map({
-        container: mapContainer.current, // 지도가 렌더링될 DOM 요소
-        style: mapStyle, // 기본 지도 스타일
-        center: [126.978, 37.5665], // 서울의 위도, 경도
-        zoom: 10, // 초기 확대 비율 (3D 지형이 잘 보이도록 설정)
-        pitch: 45, // 지도 기울기 설정 (3D 효과를 위해)
-        bearing: -17.6, // 지도 방향 설정
-        language: 'ko' // 지도 언어를 한국어로 설정
-      });
-  
-      // 스타일이 로드될 때의 이벤트 핸들러
-      map.on('style.load', () => {
-        map.setStyle(mapStyle); // 지정된 스타일을 지도에 적용
-      });
-  
-      // 지도가 로드된 후의 이벤트 핸들러
-      map.on('load', () => {
-        // 3D 지형을 추가하기 위한 데이터 소스 추가
-        map.addSource('mapbox-dem', {
-          type: 'raster-dem', // DEM(디지털 표고 모델) 데이터 타입
-          url: 'mapbox://mapbox.mapbox-terrain-dem-v1', // Mapbox에서 제공하는 지형 데이터 소스 URL
-          tileSize: 512, // 타일 크기 설정
-          maxzoom: 14 // 최대 확대 레벨 설정
-        });
-        // 지형 설정 (소스와 강조 정도 지정)
-        map.setTerrain({ source: 'mapbox-dem', exaggeration: 1.5 }); // 지형의 높이를 1.5배 강조
-  
-        // 3D 건물 레이어 추가
-        map.addLayer({
-          'id': '3d-buildings', // 레이어 ID
-          'source': 'composite', // 데이터 소스
-          'source-layer': 'building', // 건물 데이터 소스 레이어
-          'filter': ['==', 'extrude', 'true'], // 건물 레이어 필터 설정 (extrude 속성이 true인 경우에만 렌더링)
-          'type': 'fill-extrusion', // 레이어 타입 설정 (채우기 외부 레이어)
-          'minzoom': 15, // 최소 확대 레벨 설정
-          'paint': {
-            'fill-extrusion-color': '#aaa', // 건물 색상 설정
-            'fill-extrusion-height': [ // 건물 높이 설정
-              'interpolate', ['linear'], ['zoom'], // 확대 수준에 따른 높이 보간
-              15, 0, // 확대 레벨 15에서 높이 0
-              15.05, ['get', 'height'] // 확대 레벨 15.05에서 높이를 데이터에서 가져옴
-            ],
-            'fill-extrusion-base': [ // 건물 바닥 높이 설정
-              'interpolate', ['linear'], ['zoom'], // 확대 수준에 따른 바닥 높이 보간
-              15, 0, // 확대 레벨 15에서 바닥 높이 0
-              15.05, ['get', 'min_height'] // 확대 레벨 15.05에서 최소 높이를 데이터에서 가져옴
-            ],
-            'fill-extrusion-opacity': 0.6 // 건물 투명도 설정
+const Mapcomponent1 = () => {
+  const mapContainer = useRef(null);
+  const [populationData, setPopulationData] = useState({});
+  const [map, setMap] = useState(null);
+
+  // API에서 인구 밀도 데이터 가져오기
+  const fetchPopulationData = async () => {
+    console.log("Fetching population data...");
+
+    const populationDensityData = {};
+    const requests = areaJson.features.map((area) => {
+      const url = `http://openapi.seoul.go.kr:8088/4b766c79436b67623632504c436862/xml/citydata_ppltn/1/5/${encodeURIComponent(area.properties.AREA_NM)}`;
+
+      return fetch(url)
+        .then(response => response.text())
+        .then(data => {
+          const parser = new DOMParser();
+          const xml = parser.parseFromString(data, 'application/xml');
+
+          const populationMin = xml.getElementsByTagName('AREA_PPLTN_MIN')[0]?.textContent;
+          const populationMax = xml.getElementsByTagName('AREA_PPLTN_MAX')[0]?.textContent;
+          const congestionLevel = xml.getElementsByTagName('AREA_CONGEST_LVL')[0]?.textContent;
+
+          // 혼잡도 데이터를 "여유", "보통", "약간 붐빔", "붐빔"으로 매핑
+          let congestion = 'Low'; // 기본값 설정
+          if (congestionLevel === '붐빔') {
+            congestion = 'High';  // '붐빔' -> High
+          } else if (congestionLevel === '약간 붐빔') {
+            congestion = 'MediumHigh'; // '약간 붐빔' -> MediumHigh
+          } else if (congestionLevel === '보통') {
+            congestion = 'Medium'; // '보통' -> Medium
+          } else if (congestionLevel === '여유') {
+            congestion = 'Low';   // '여유' -> Low
           }
+
+          populationDensityData[area.properties.AREA_NM] = {
+            populationMin: parseInt(populationMin) || 0,
+            populationMax: parseInt(populationMax) || 0,
+            congestionLevel: congestion, // 혼잡도 수준 저장
+          };
+        })
+        .catch(error => {
+          console.error(`Error fetching data for ${area.properties.AREA_NM}:`, error);
         });
-      });
-  
-      // 컴포넌트가 해제될 때 지도를 제거
-      return () => {
-        map.remove(); // 메모리 누수를 방지하기 위해 지도 인스턴스 제거
-      };
-    }, [mapStyle]); // mapStyle이 변경될 때마다 useEffect 재실행
-    
-    // 컴포넌트의 렌더링: 전체 화면을 지도 요소로 채움
-    return <div ref={mapContainer} style={{ width: '100%', height: '100vh' }} />;
+    });
+
+    await Promise.all(requests); // 모든 요청이 완료될 때까지 기다림
+    console.log("Finished fetching population data:", populationDensityData);
+    setPopulationData(populationDensityData);
   };
-  
-  // MapComponent 컴포넌트 내보내기
-  export default MapComponent;
-  
+
+  // Mapbox 초기화
+  useEffect(() => {
+    if (map) return;
+
+    const initializeMap = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: 'mapbox://styles/kgb4854/cm2xeuvps002q01oj8wpfham3',
+      center: [126.978, 37.5665],
+      zoom: 11,
+      language: "ko"
+    });
+
+    initializeMap.on('load', () => {
+      setMap(initializeMap);
+    });
+
+    return () => {
+      if (map) {
+        map.remove();
+      }
+    };
+  }, [map]);
+
+  useEffect(() => {
+    if (!map) return;
+
+    // 자동으로 인구 밀도 데이터 가져오기
+    fetchPopulationData();
+
+    // 30분마다 데이터 새로고침
+    const interval = setInterval(fetchPopulationData, 30 * 60 * 1000); // 30 minutes interval
+
+    return () => {
+      clearInterval(interval); // component unmount 시 interval 클리어
+    };
+  }, [map]);
+
+  useEffect(() => {
+    if (!map || Object.keys(populationData).length === 0) return;
+
+    // populationData에 있는 구역만 필터링하여 폴리곤 레이어 데이터 생성
+    const polygonData = {
+      type: 'FeatureCollection',
+      features: areaJson.features
+        .map((area) => {
+          const density = populationData[area.properties.AREA_NM];
+          if (!density) return null;
+
+          return {
+            type: 'Feature',
+            geometry: area.geometry,
+            properties: {
+              congestionLevel: density.congestionLevel, // 혼잡도 수준
+            },
+          };
+        })
+        .filter(Boolean), // null 값을 제거하여 유효한 데이터만 남김
+    };
+
+    // 기존에 데이터가 없으면 소스를 추가하고, 데이터가 있으면 업데이트
+    if (map.getSource('populationDensity')) {
+      map.getSource('populationDensity').setData(polygonData);
+    } else {
+      map.addSource('populationDensity', {
+        type: 'geojson',
+        data: polygonData,
+      });
+
+      map.addLayer({
+        id: 'population-polygon',
+        type: 'fill-extrusion',  // 3D 표현을 위해 'fill-extrusion' 사용
+        source: 'populationDensity',
+        paint: {
+          'fill-extrusion-color': [
+            'match',
+            ['get', 'congestionLevel'],
+            'Low', 'green',        // 혼잡도 Low - 초록색
+            'Medium', 'yellow',    // 혼잡도 Medium - 노란색
+            'MediumHigh', 'orange',// 혼잡도 MediumHigh - 주황색
+            'High', 'red',         // 혼잡도 High - 빨간색
+            'gray',                // 기본 색상 (혼잡도가 없거나 다른 값일 경우)
+          ],
+          'fill-extrusion-height': [
+            'match',
+            ['get', 'congestionLevel'],
+            'Low', 30,            // 'Low' - 30m
+            'Medium', 60,         // 'Medium' - 60m
+            'MediumHigh', 90,     // 'MediumHigh' - 90m
+            'High', 120,          // 'High' - 120m
+            50,                   // 기본 높이 (혼잡도가 없거나 다른 값일 경우)
+          ],
+          'fill-extrusion-opacity': 0.3,
+        },
+      });
+    }
+
+    console.log("3D polygon data added to map");
+  }, [map, populationData]);
+
+  return (
+    <div>
+      <div
+        ref={mapContainer}
+        style={{ width: '100%', height: '100vh' }}
+      />
+    </div>
+  );
+};
+
+export default Mapcomponent1;

@@ -1,0 +1,40 @@
+.resultGraph_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.result_text {
+    margin-top: 61px;
+    margin-bottom: 65px;
+    color: #444;
+    text-align: center;
+    font-family: "Pretendard Variable";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.graph_stick1_container {
+    display: flex;
+    width: 253px;
+    height: 214px;
+    text-align: center;
+}
+
+.jungbobogi1 {
+    margin-top: 80px;
+    border-radius: 20px;
+    width: 376px;
+    height: 194px;
+    background-color: #F5F5F5;
+}
+
+.jungbobogi2 {
+    margin-top: 80px;
+    border-radius: 20px;
+    width: 376px;
+    height: 194px;
+    background-color: #F5F5F5;
+}
