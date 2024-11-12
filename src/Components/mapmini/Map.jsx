@@ -71,7 +71,7 @@ const MapComponent = () => {
     }, [mapStyle]); // mapStyle이 변경될 때마다 useEffect 재실행
     
     // 컴포넌트의 렌더링: 전체 화면을 지도 요소로 채움
-    return <div ref={mapContainer} style={{ width: '328px', height: '402px', borderRadius: '12px' }} />;
+    return <div ref={mapContainer} style={{ width: '310px', height: '360px', borderRadius: '12px' }} />;
   };
   
   // MapComponent 컴포넌트 내보내기

@@ -1,9 +1,17 @@
-import React from "react";
+import React, {useEffect} from "react";
 import './Question.css';
 import Map from '../../Components/mapmini/Map'
-import NavBar from "../../Components/NavBar";
 
 const Question = () =>{
+
+    useEffect(() => {
+        document.body.style.overflow = 'hidden';
+
+        return () => {
+            document.body.style.overflow = 'auto'; // 컴포넌트가 언마운트되면 스크롤을 복원
+        };
+    }, []);
+
     return(
         <div>
             <div className="wrapper">
@@ -11,10 +19,19 @@ const Question = () =>{
                 <div className="select_container">
                     <select>
                         <option value="" disabled selected>어떤 지역을 원하시나요?</option>
-                        <option value="1">홍대</option>
-                        <option value="2">강남구</option>
-                        <option value="3">동대문</option>
-                        <option value="4">광화문</option>
+                        <option value="1">강남구</option>
+                        <option value="2">강동구</option>
+                        <option value="3">강북구</option>
+                        <option value="4">강서구</option>
+                        <option value="5">관악구</option>
+                        <option value="6">광진구</option>
+                        <option value="7">구로구</option>
+                        <option value="8">금천구</option>
+                        <option value="9">노원구</option>
+                        <option value="11">동대문구</option>
+                        <option value="12">동작구</option>
+                        <option value="13">마포구</option>
+                        <option value="14">서대문구</option>
                     </select>
                     <select>
                         <option value="" disabled selected>어떤 업종을 원하시나요?

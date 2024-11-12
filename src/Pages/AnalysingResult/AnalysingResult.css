@@ -16,13 +16,14 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
  
 .Result {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     margin-top: 20px;
     position: relative; /* 자식의 절대 위치 기준 */
     width: 284px; /* .circleResult 크기에 맞춤 */
@@ -37,7 +38,7 @@
  
 .p3 {
     position: absolute;
-    top: 50%;
+    top: 54%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;

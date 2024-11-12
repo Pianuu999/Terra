@@ -14,7 +14,7 @@ const AnalysingResult = () => {
                 <img src={item3} className="circleResult"/>
                 <p className="p3">연남동</p> {/* 분석결과 데이터 정보가져오기*/}
             </div>
-            <button className="startBtn" onClick={() => window.location.href = "/home"}>
+            <button className="startBtn" onClick={() => window.location.href = "/ResultGraph"}>
                 <a>상세 보고서 보러가기</a>
             </button>
         </div>
