@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class PopulationService {
 
     private final RestTemplate restTemplate = new RestTemplate();
-    private final String apiKey = "71516965496b6f6f3636515a765047";
+    private final String apiKey = "api"; //apikey
     private final List<String> locations = new ArrayList<>(List.of(
             "강남 MICE 관광특구", "동대문 관광특구", "명동 관광특구", "이태원 관광특구", "잠실 관광특구", "종로·청계 관광특구",
             "홍대 관광특구", "경복궁", "광화문·덕수궁", "보신각", "서울 암사동 유적", "창덕궁·종묘", "가산디지털단지역",
