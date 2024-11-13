@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Navigate, useNavigate } from 'react-router-dom';
 import { BarChart, Bar, XAxis, LabelList, ResponsiveContainer, PieChart, Pie, Legend, Cell } from 'recharts';
 import sourceData from "../../Data/sourceData.json"; // 데이터 소스
 import '../ResultGraph/ResultGraph.css';
@@ -7,10 +8,10 @@ import bellIcon from '../../Assets/Image/icon-alarm-3.png';
 
 const ResultGraph = () => {
 
-  //바 그래프이며, 적합한 동 순위별 제공
   const [barData, setBarData] = useState([]);
 
-  // 데이터 로드 시 sourceData를 변환하여 상태로 설정
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (sourceData && sourceData.length > 0) {
       const formattedData = sourceData
@@ -25,7 +26,7 @@ const ResultGraph = () => {
   }, []);
 
   const goHome = () => {
-    window.location.href = '/home'; // 홈으로 돌아가기
+    navigate('/home') // 홈으로 돌아가기
   };
 
   // Pie chart data and colors
@@ -35,14 +36,14 @@ const ResultGraph = () => {
   ];
 
   const agePieData = [
-    { name: '10대 ~ 20대', value: 5 },
-    { name: '20대 ~ 30대', value: 2 },
-    { name: '30대 ~ 40대', value: 3 },
-    { name: '40대 ~ 50대', value: 2 },
-    { name: '50대 ~ 60대', value: 1 },
+    { name: '10대 ~ 20대', value: 5, color: '#FFBB28' },
+    { name: '20대 ~ 30대', value: 2, color: '#FF8042' },
+    { name: '30대 ~ 40대', value: 3, color: '#0088FE' },
+    { name: '40대 ~ 50대', value: 2, color: '#00C49F' },
+    { name: '50대 ~ 60대', value: 1, color: '#BA4C9D' },
   ];
 
-  const COLORS = ['#FFBB28', '#0088FE','#63B0E8','#94C4DD'];
+  const COLORS = ['#FFBB28', '#0088FE', '#63B0E8', '#94C4DD'];
 
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
@@ -117,8 +118,8 @@ const ResultGraph = () => {
                     fill="#8884d8"
                     dataKey="value"
                   >
-                    {pieData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    {agePieData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
                     ))}
                   </Pie>
                 </PieChart>
@@ -128,28 +129,33 @@ const ResultGraph = () => {
           <div className="genderBox">
             <p className="minitext1">&lt; 연령별 소비 &gt;</p>
             <div className="pieChart">
-            <ResponsiveContainer>
-              <PieChart>
-                <Legend layout="vertical" verticalAlign="top" align="top" />
-                <Pie
-                  data={agePieData}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  label={renderCustomizedLabel}
-                  outerRadius={120}
-                  fill="#8884d8"
-                  dataKey="value"
-                >
-                  {pieData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-              </PieChart>
-            </ResponsiveContainer>
-          </div> {/* 파이차트 끝 */}
+              <ResponsiveContainer>
+                <PieChart>
+                  <Legend layout="vertical" verticalAlign="top" align="top" />
+                  <Pie
+                    data={agePieData}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    label={renderCustomizedLabel}
+                    outerRadius={120}
+                    fill="#8884d8"
+                    dataKey="value"
+                  >
+                    {agePieData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                </PieChart>
+              </ResponsiveContainer>
+            </div> {/* 파이차트 끝 */}
           </div>
         </div>
+          <div className="jungbobogi3">
+            <div className="competitorBox">
+            
+            </div>
+          </div>
       </div>
     </div>
   );

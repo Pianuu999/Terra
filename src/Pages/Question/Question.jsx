@@ -1,8 +1,11 @@
 import React, {useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import './Question.css';
 import Map from '../../Components/mapmini/Map'
 
 const Question = () =>{
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         document.body.style.overflow = 'hidden';
@@ -45,7 +48,7 @@ const Question = () =>{
                 <div className="mapMini">
                     <Map/>
                 </div>
-                <button className="startBtn2" onClick={() => window.location.href = "Analysing"}>
+                <button className="startBtn2" onClick={() => navigate('/Analysing')}>
                     <a>상권분석 시작하기</a>
                 </button>
             </div>
