@@ -1,5 +1,5 @@
 import React from "react";
-import MapComponent from "../../MapComponent"; // 두 단계 위로 올라감
+import MapComponent from "../../MapComponent";
 import './Home.css'
 import NavBar from "../../Components/NavBar";
 

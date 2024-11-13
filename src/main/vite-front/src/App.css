@@ -1,7 +1,22 @@
+/* App.css */
 @font-face {
     font-family: 'PretendardVariable';
     src: url('/src/Assets/Fonts/PretendardVariable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
 }
+
+* {
+    font-family: 'PretendardVariable', sans-serif; /* 모든 요소에 폰트 적용 */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'PretendardVariable', sans-serif; /* 페이지 전체에 폰트 적용 */
+}
+
 
 * {
     padding: 0;
