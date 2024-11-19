@@ -15,9 +15,9 @@ const AnalysingResult = () => {
             </div>
             <div className="Result">
                 <img src={item3} className="circleResult"/>
-                <p className="p3">연남동</p> {/* 분석결과 데이터 정보가져오기*/}
+                <p className="p3">먹자골목</p> {/* 분석결과 데이터 정보가져오기*/}
             </div>
-            <button className="startBtn" onClick={() => navigate('/ResultGraph')}>
+            <button className="startBtn" onClick={() => navigate('/design')}>
                 <a>상세 보고서 보러가기</a>
             </button>
         </div>

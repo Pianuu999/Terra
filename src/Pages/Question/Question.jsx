@@ -1,11 +1,19 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import './Question.css';
-import Map from '../../Components/mapmini/Map'
+import regionCoordinates from "../../Data/regionCoordinates";
 
 const Question = () =>{
 
     const navigate = useNavigate();
+    const [region, setRegion] = useState('');
+    const [industry, setIndustry] = useState('');
+
+    const regionSelect = () => {
+        const [selectedRegions, setSelectedRegions] = useState('')
+    };
+
+    //지도 위치 업데이트를 위한
 
     useEffect(() => {
         document.body.style.overflow = 'hidden';
@@ -17,40 +25,29 @@ const Question = () =>{
 
     return(
         <div>
-            <div className="wrapper">
+            <div className="wrapper2">
                 <h3 className="h3">고객님의 원하는 정보를 알려드려요.</h3>
                 <div className="select_container">
-                    <select>
+                    <select onChange={setRegion} value={region}>
                         <option value="" disabled selected>어떤 지역을 원하시나요?</option>
-                        <option value="1">강남구</option>
-                        <option value="2">강동구</option>
-                        <option value="3">강북구</option>
-                        <option value="4">강서구</option>
-                        <option value="5">관악구</option>
-                        <option value="6">광진구</option>
-                        <option value="7">구로구</option>
-                        <option value="8">금천구</option>
-                        <option value="9">노원구</option>
-                        <option value="11">동대문구</option>
-                        <option value="12">동작구</option>
-                        <option value="13">마포구</option>
-                        <option value="14">서대문구</option>
+                        {Object.keys(regionCoordinates).map((regionName, index) => (
+                            <option key={index} value={regionName}>{regionName}</option>
+                        ))}
                     </select>
-                    <select>
+                    <select onClick={(e) => setIndustry(e.target.value)}>
                         <option value="" disabled selected>어떤 업종을 원하시나요?
                         </option>
                         <option value="1">요식업</option>
                         <option value="2">유통업</option>
-                        <option value="3">의료업</option>
+                        <option value="3">여가/오락</option>
                         <option value="4">미용업</option>
                     </select>
                 </div>
-                <div className="mapMini">
-                    <Map/>
-                </div>
+                <div className="btn_container">
                 <button className="startBtn2" onClick={() => navigate('/Analysing')}>
-                    <a>상권분석 시작하기</a>
+                    상권분석 시작하기
                 </button>
+                </div>
             </div>
         </div>
     )

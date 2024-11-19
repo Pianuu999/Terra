@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";  // useEffect를 추가로 import합니다.
 import { useNavigate } from "react-router-dom";
-import item from '../../Assets/Image/Group22.png';
+import item from '../../Assets/Image/Group30.svg';
 import item2 from '../../Assets/Image/Group2.png';
+import icon from'../../Assets/Image/turn.svg';
 import './Analysing.css';  // CSS 파일 추가
+import logo from '../../Assets/Image/logo_01.svg';
 
 const Analysing = () => {
 
@@ -19,12 +21,13 @@ const Analysing = () => {
     }, [navigate]);
 
     return (
-        <div className="wrapper">
+        <div className="backgroundAnalysng">
             <div className="circle">
-                <img src={item} alt="back" className="rotating"/>
-                <img src={item2} alt="icon" className="icon"/>
+                <img src={icon} alt="back" className="rotating"/>
+                <img src={item} alt="icon" className="icon"/>
             </div>
             <h3 className="ing">분석중</h3>
+            <img src={logo} className="imgLogo"/>
         </div>
     );
 }

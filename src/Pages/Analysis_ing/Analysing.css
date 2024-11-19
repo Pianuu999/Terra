@@ -1,16 +1,18 @@
 /* Analysing.css */
 
-.wrapper {
+.backgroundAnalysng {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
   text-align: center;
+  height: 100vh;
+  background-image: url('../../Assets/Image/analysingBackground3.jpg');
+  background-size: cover;
 }
 
 .circle {
-  margin-top: 100px;
   position: relative;
   width: 300px; /* 이미지 크기에 맞게 조정 */
   height: 300px; /* 이미지 크기에 맞게 조정 */
@@ -34,11 +36,16 @@
 }
 
 .ing {
-  margin-top: 72px;
+  margin-top: 60px;
   font-size: 30px;
   font-family: "Pretendard Variable";
   font-weight: 500;
-  color: #444;
+  color: #ffffff;
+}
+
+.imgLogo {
+  position: absolute;
+  bottom: 55px;
 }
 
 @keyframes bounce {

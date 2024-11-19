@@ -59,7 +59,7 @@ const ResultGraph = () => {
   };
 
   return (
-    <div>
+    <div className="resultGraph_container">
       <div className="backIcon" onClick={goHome}>
         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M23.75 15H6.25M6.25 15L15 23.75M6.25 15L15 6.25" stroke="#1E1E1E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

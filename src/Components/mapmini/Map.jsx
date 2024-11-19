@@ -5,7 +5,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 mapboxgl.accessToken = 'pk.eyJ1Ijoia2diNDg1NCIsImEiOiJjbTJ3djA1aWwwM2E3MnFwaG01ZHdjdnY4In0.bAzZr4Rw_6EVo0auRt7ubQ'; // 여기에 Mapbox 토큰을 입력하세요
 
 // MapComponent 함수형 컴포넌트 정의
-const MapComponent = () => {
+const MapComponent = ({ center }) => {
     // mapContainer는 지도 DOM 요소를 참조하기 위한 Ref
     const mapContainer = useRef(null);
     // Mapbox 스타일을 관리하기 위한 상태, 초기값으로 지정한 스타일 사용
@@ -16,8 +16,8 @@ const MapComponent = () => {
       const map = new mapboxgl.Map({
         container: mapContainer.current, // 지도가 렌더링될 DOM 요소
         style: mapStyle, // 기본 지도 스타일
-        center: [126.978, 37.5665], // 서울의 위도, 경도
-        zoom: 10, // 초기 확대 비율 (3D 지형이 잘 보이도록 설정)
+        center: center, // 서울의 위도, 경도
+        zoom: 15, // 초기 확대 비율 (3D 지형이 잘 보이도록 설정)
         pitch: 45, // 지도 기울기 설정 (3D 효과를 위해)
         bearing: -17.6, // 지도 방향 설정
         language: 'ko' // 지도 언어를 한국어로 설정
@@ -62,13 +62,18 @@ const MapComponent = () => {
             'fill-extrusion-opacity': 0.6 // 건물 투명도 설정
           }
         });
+         // 중앙에 마커 추가
+         new mapboxgl.Marker({ color: 'red' }) // 마커 색상을 빨간색으로 설정
+         .setLngLat(center) // 마커 위치를 중앙 좌표로 설정
+         .addTo(map); // 지도의 중앙에 마커 추가
       });
+      
   
       // 컴포넌트가 해제될 때 지도를 제거
       return () => {
         map.remove(); // 메모리 누수를 방지하기 위해 지도 인스턴스 제거
       };
-    }, [mapStyle]); // mapStyle이 변경될 때마다 useEffect 재실행
+    }, [mapStyle, center]); // mapStyle이 변경될 때마다 useEffect 재실행
     
     // 컴포넌트의 렌더링: 전체 화면을 지도 요소로 채움
     return <div ref={mapContainer} style={{ width: '310px', height: '360px', borderRadius: '12px' }} />;

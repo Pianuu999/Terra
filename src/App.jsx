@@ -9,6 +9,9 @@ import Intro from "./Pages/Intro/Intro";
 import AnalysingResult from "./Pages/AnalysingResult/AnalysingResult";
 import ResultGraph from "./Pages/resultGraph/resultGraph";
 import NavBar from "./Components/NavBar";
+import Design from "./Pages/ResultGraph/design";
+import Trend from "./Pages/Trend/Trend";
+import Mapcomponent1 from "./Pages/Recomend/Recomend";
 
 function Main() {
   const navigate = useNavigate(); // useNavigate 훅 사용
@@ -46,6 +49,9 @@ export default function App() {
         <Route path="/Analysing" element={<Analysing />} /> {/* 분석 로딩 페이지 */}
         <Route path="/AnalysingResult" element={<AnalysingResult />} /> {/* 분석 결과 페이지 */}
         <Route path="/ResultGraph" element={<ResultGraph />} /> {/* 분석 그래프 결과 페이지 */}
+        <Route path="/design" element={<Design />} /> {/* 분석 그래프 결과 페이지2 */}
+        <Route path="/trend" element={<Trend />} /> {/* 분석 그래프 결과 페이지2 */}
+        {/* <Route path="/recomend" element={<Mapcomponent1 />} /> 분석 그래프 결과 페이지2 */}
       </Routes>
     </Router>
   );
