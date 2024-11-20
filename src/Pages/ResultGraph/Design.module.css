@@ -84,7 +84,8 @@
 .profile {
     display: flex;
     flex-direction: row;
-    margin-bottom: 70px;
+    margin-bottom: 50px;
+    margin-top: 70px;
 }
 
 .profileTextContainer {

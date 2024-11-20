@@ -73,7 +73,6 @@ const Design = () => {
                 <div className={styles.cardContent}>
                     <h3 className={styles.result_text}>상세 분석 결과</h3>
                     <div className={styles.profile}>
-                        <img src={men} alt="Profile" style={{height:50, width: 50, marginBottom: 50}}/>
                         <div className={styles.profileTextContainer}>
                             <h3 className={styles.profileText}> 최근 3개월간의 자료를 바탕으로 추출된 결과입니다.</h3>
                         </div>

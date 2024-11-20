@@ -46,7 +46,7 @@ export default function NavBar() {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to="/trend" className={({ isActive }) => (isActive ? "active" : "")}>
+                    <NavLink to="/trendHome" className={({ isActive }) => (isActive ? "active" : "")}>
                         트랜드
                     </NavLink>
                 </li>

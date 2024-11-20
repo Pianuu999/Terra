@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import areaJson from './seoul80_place.json';
+import areaJson from '../../Data/seoul80_place.json';
+import styles from '../../Pages/Recomend/Recomend.module.css';
+import graBar from '../../Assets/Image/gradationBar.svg'
+import graBar2 from '../../Assets/Image/graBar2.svg';
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoia2diNDg1NCIsImEiOiJjbTJ1NDlmZ2YwOWljMmtvaWltZjFlZXdkIn0.aLnwIt7wXc7ir6vjkogdnQ';
 
-const Mapcomponent1 = () => {
+const Recomend = () => {
   const mapContainer = useRef(null);
   const [selectedAreaData, setSelectedAreaData] = useState(null);
   const [populationData, setPopulationData] = useState({});
@@ -13,8 +16,8 @@ const Mapcomponent1 = () => {
   const [map, setMap] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [updateTime, setUpdateTime] = useState('');
-  const [isPanelOpen, setIsPanelOpen] = useState(false); // 패널 열림 상태 관리
-  const [isFullScreen, setIsFullScreen] = useState(false); // 전체 화면 상태 관리
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const [isFullScreen, setIsFullScreen] = useState(false);
 
   const fetchPopulationAndCommercialData = async () => {
     setIsLoading(true);
@@ -71,8 +74,8 @@ const Mapcomponent1 = () => {
         container: mapContainer.current,
         style: 'mapbox://styles/kgb4854/cm2xeuvps002q01oj8wpfham3',
         center: [126.978, 37.5665],
-        zoom: 11,
-        language: 'ko'
+        zoom: 12,
+        language: 'ko',
       });
 
       initializeMap.on('load', () => {
@@ -98,22 +101,24 @@ const Mapcomponent1 = () => {
 
     const polygonData = {
       type: 'FeatureCollection',
-      features: areaJson.features.map((area) => {
-        const popData = populationData[area.properties.AREA_NM];
-        const commData = commercialData[area.properties.AREA_NM];
+      features: areaJson.features
+        .map((area) => {
+          const popData = populationData[area.properties.AREA_NM];
+          const commData = commercialData[area.properties.AREA_NM];
 
-        if (!popData || !commData) return null;
+          if (!popData || !commData) return null;
 
-        return {
-          type: 'Feature',
-          geometry: area.geometry,
-          properties: {
-            ...popData,
-            ...commData,
-            AREA_NM: area.properties.AREA_NM,
-          },
-        };
-      }).filter(Boolean),
+          return {
+            type: 'Feature',
+            geometry: area.geometry,
+            properties: {
+              ...popData,
+              ...commData,
+              AREA_NM: area.properties.AREA_NM,
+            },
+          };
+        })
+        .filter(Boolean),
     };
 
     if (map.getSource('populationDensity')) {
@@ -129,64 +134,70 @@ const Mapcomponent1 = () => {
           'fill-extrusion-color': [
             'match',
             ['get', 'commercialLevel'],
-            '바쁜', 'red',      // '바쁜'은 빨간색
-            '분주한', 'orange', // '분주한'은 오렌지색
-            '보통', 'yellow',   // '보통'은 노란색
-            '한산한', 'green',  // '한산한'은 초록색
-            'gray',             // 그 외는 회색
+            '바쁜',
+            'red',
+            '분주한',
+            'orange',
+            '보통',
+            'yellow',
+            '한산한',
+            'green',
+            'gray',
           ],
           'fill-extrusion-height': [
-            'interpolate', ['linear'], ['get', 'paymentCount'], 0, 0, 500, 100,
+            'interpolate',
+            ['linear'],
+            ['get', 'paymentCount'],
+            0,
+            0,
+            500,
+            100,
           ],
           'fill-extrusion-opacity': 0.5,
         },
       });
     }
 
-   // 구역 클릭 이벤트
-  map.on('click', 'population-polygon', (e) => {
-    const properties = e.features[0].properties;
+    map.on('click', 'population-polygon', (e) => {
+      const properties = e.features[0].properties;
 
-    // 색깔이 칠해진 구역인지 확인 (예: commercialLevel 유무 확인)
-    if (properties.commercialLevel) {
-      setSelectedAreaData({
-        AREA_NM: properties.AREA_NM,
-        commercialLevel: properties.commercialLevel,
-        paymentCount: properties.paymentCount,
-        paymentMin: properties.paymentMin,
-        paymentMax: properties.paymentMax,
-      });
-      setIsPanelOpen(true); // 패널 열기
-    } else {
-      setSelectedAreaData(null);
-      setIsPanelOpen(false); // 패널 닫기
-    }
-  });
+      if (properties.commercialLevel) {
+        setSelectedAreaData({
+          AREA_NM: properties.AREA_NM,
+          commercialLevel: properties.commercialLevel,
+          paymentCount: properties.paymentCount,
+          paymentMin: properties.paymentMin,
+          paymentMax: properties.paymentMax,
+        });
+        setIsPanelOpen(true);
+      } else {
+        setSelectedAreaData(null);
+        setIsPanelOpen(false);
+      }
+    });
 
-  // 지도 전체 클릭 이벤트 (구역 외부 클릭 처리)
-  map.on('click', (e) => {
-    const features = map.queryRenderedFeatures(e.point, { layers: ['population-polygon'] });
+    map.on('click', (e) => {
+      const features = map.queryRenderedFeatures(e.point, { layers: ['population-polygon'] });
 
-    if (features.length === 0) {
-      setSelectedAreaData(null);
-      setIsPanelOpen(false); // 패널 닫기
-    }
-  });
-}, [map, populationData, commercialData]);
+      if (features.length === 0) {
+        setSelectedAreaData(null);
+        setIsPanelOpen(false);
+      }
+    });
+  }, [map, populationData, commercialData]);
 
-  // 슬라이드 업 패널 스타일
   const panelStyle = {
     position: 'fixed',
-    bottom: isFullScreen ? '0' : '0', // 전체 화면 모드에서는 하단 고정
+    bottom: 0,
     left: 0,
     right: 0,
-    height: isFullScreen ? '95vh' : '30vh', // 전체 화면일 경우 화면을 다 덮게 설정
-    backgroundColor: 'white',
-    transition: 'height 0.3s ease-in-out',
+    height: isFullScreen ? '100vh' : '30vh',
+    backgroundColor: isFullScreen ? '#bccae3' : 'white', 
+    transition: 'height 0.3s ease-in-out, background-color 0.3s ease-in-out', 
     zIndex: 1000,
     overflowY: 'auto',
     padding: '20px',
-    borderRadius: isFullScreen ? '20px 20px 0 0' : '20px 20px 0 0', // 모서리를 둥글게 설정
+    borderRadius: isFullScreen ? '0' : '23px 23px 0 0',
   };
 
   const toggleFullScreen = () => {
@@ -197,37 +208,48 @@ const Mapcomponent1 = () => {
     <div style={{ position: 'relative' }}>
       <div ref={mapContainer} style={{ height: '100vh' }} />
       {isPanelOpen && (
-        <>
-          <button
-            onClick={toggleFullScreen}
-            style={{
-              position: 'absolute',
-              bottom: '20px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              padding: '10px 20px',
-              backgroundColor: 'blue',
-              color: 'white',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-              zIndex: 2000,
-            }}
-          >
-            {isFullScreen ? '축소' : '전체 화면'}
-          </button>
-
-          <div style={panelStyle}>
-            <h3>{selectedAreaData.AREA_NM}</h3>
-            <p>상업 활동 수준: {selectedAreaData.commercialLevel}</p>
-            <p>결제 건수: {selectedAreaData.paymentCount}</p>
-            <p>최소 결제액: {selectedAreaData.paymentMin}</p>
-            <p>최대 결제액: {selectedAreaData.paymentMax}</p>
+        <div
+          style={panelStyle}
+          onClick={toggleFullScreen} // 클릭 시 전체 화면 전환
+        >
+          <div className={styles.toggle}>
+            <svg width="71" height="8" viewBox="0 0 71 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="71" height="8" rx="4" fill="#D9D9D9" />
+            </svg>
           </div>
-        </>
+          <div className={styles.cardContent}>
+            <h3 className={styles.cardName}>{selectedAreaData.AREA_NM}</h3>
+            <div className={styles.back}>
+              <div className={styles.box}>
+                <div className={styles.industryContainer}>
+                  <div className={styles.industryText}>
+                    <p className={styles.title}> 상업 활동 수준 :</p>
+                    <p className={styles.title}>{selectedAreaData.commercialLevel}</p>
+                  </div>
+                  <img src={graBar2} className={styles.graBar} />
+                </div>
+              </div>
+              <div className={styles.box}>
+                <p className={styles.title}>결제 건수 :
+                  <p className={styles.text2}>{selectedAreaData.paymentCount} <p style={{color: 'black', fontSize: 26, alignContent: 'center', fontWeight: 500}}>건</p></p>
+                </p>
+              </div>
+              <div className={styles.box2}>
+                <div className={styles.graBarContainer}>
+                  <p className={styles.title}>결제액</p>
+                  <div className={styles.graBarText}>
+                    <p>{selectedAreaData.paymentMin} 원</p>
+                    <p>{selectedAreaData.paymentMax} 원</p>
+                  </div>
+                  <img src={graBar} className={styles.graBar} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
 };
 
-export default Mapcomponent1;
+export default Recomend;
