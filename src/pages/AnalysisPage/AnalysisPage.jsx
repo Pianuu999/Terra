@@ -5,7 +5,7 @@ import Image_01 from "/images/3d_customer.png";
 import styles from "./AnalysisPage.module.css";
 
 // 영역 자치구.json 파일을 불러오는 부분 (실제 데이터 파일로 경로 수정 필요)
-import data from '../../Data/서울시 상권분석서비스(영역-자치구).json'; 
+import data from '../../Data/서울시 상권분석서비스(영역-자치구).json';
 
 export default function AnalysisPage() {
     const navigate = useNavigate();
@@ -115,6 +115,21 @@ export default function AnalysisPage() {
     // 선택된 카테고리 데이터를 가져옵니다.
     const selectedCategoryData = categories.find((category) => category.value === selectedCategory);
 
+    const handleAnalysisStart = () => {
+        if (selectedRegions.length === 0 || !selectedCategory || !selectedSubCategory) {
+            alert("모든 항목을 선택해주세요!");
+            return;
+        }
+
+        navigate('/Analysing', {
+            state: {
+                selectedRegions, // 선택된 지역
+                selectedCategory, // 선택된 대분류
+                selectedSubCategory // 선택된 소분류
+            }
+        });
+    };
+
     return (
         <div style={{ backgroundColor: 'aliceblue', marginTop: '128px' }}>
             <NavBar />
@@ -204,10 +219,11 @@ export default function AnalysisPage() {
                                 </div>
                             )}
                         </div>
-                        <button className={styles.button_01} onClick={() => navigate('/Analysing')}>분석 시작하기</button>
+                        <button className={styles.button_01} onClick={handleAnalysisStart}>분석 시작하기</button>
                     </div>
                 </div>
             </div>
         </div>
+
     );
-}
+};

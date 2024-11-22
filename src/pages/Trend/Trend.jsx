@@ -15,7 +15,7 @@ const Trend = () => {
 
     return (
         <>
-        <NavBar/>
+            <NavBar />
             <div className={styles.wrapper}>
                 <div className={styles.banner}>
                     <div className={styles.logo} onClick={() => navigate('/home')}>
@@ -73,7 +73,7 @@ const Trend = () => {
                                 <h3 className={styles.miniTitle2}>상권 유형별 외식시장 규모 변화</h3>
                             </div>
                             <div className={styles.graph}>
-                                <img src={graph} />
+                                <img src={graph} width={'328px'} />
                             </div>
                             <div className={styles.contextContainer2}>
                                 <h3 className={styles.context}>
@@ -86,42 +86,42 @@ const Trend = () => {
                                 </h3>
                             </div>
                             <div className={styles.graph}>
-                                <img src={graph2} />
+                                <img src={graph2} width={'328px'} />
                             </div>
                             <div className={styles.contextContainer2}>
                                 <h3 className={styles.context}>
-                                위 그래프는 일반 상권인 서울 용리
-                                단길 아래 그래프는 대학가인 서울 신촌 상권의 월별 매출
-                                변화를 표시한 건데요. 용리단길의 경우 2021년 말부터 회복을
-                                시작해 2022년 하반기부터는 코로나19 이전보다 오히려 매출이
-                                 늘어나는 현상이 발생했죠. 여전히 코로나19 이전과 비슷하거나
-                                  낮은 매출을 기록하고 있는 신촌"대학가" 역시 올해에는 다른
-                                   상권과 마찬가지로 코로나19 이전 수준을 넘어서는 성장을
-                                   할 것으로 예측됩니다. 이러한 슬로우스타터는 상권이 하나
-                                   더 있는데요. 바로 '위성상권'입니다. 전통적인 대형
+                                    위 그래프는 일반 상권인 서울 용리
+                                    단길 아래 그래프는 대학가인 서울 신촌 상권의 월별 매출
+                                    변화를 표시한 건데요. 용리단길의 경우 2021년 말부터 회복을
+                                    시작해 2022년 하반기부터는 코로나19 이전보다 오히려 매출이
+                                    늘어나는 현상이 발생했죠. 여전히 코로나19 이전과 비슷하거나
+                                    낮은 매출을 기록하고 있는 신촌"대학가" 역시 올해에는 다른
+                                    상권과 마찬가지로 코로나19 이전 수준을 넘어서는 성장을
+                                    할 것으로 예측됩니다. 이러한 슬로우스타터는 상권이 하나
+                                    더 있는데요. 바로 '위성상권'입니다. 전통적인 대형
                                     상권의 수요 일부가 인근으로 넘어가면서 형성되는
                                     상권을 위성 상권이라고 합니다. 코로나19 이후 폭
                                     발적으로 증가한 수요를 기존 상권이 전부 흡수하지
-                                     못하면서 지난해부터 이러한 위성상권들이 크게 성
-                                     장하고 있습니다. 대표적인 예로, 성수동 상권의
-                                      위성 상권인 왕십리역을 보시죠.
+                                    못하면서 지난해부터 이러한 위성상권들이 크게 성
+                                    장하고 있습니다. 대표적인 예로, 성수동 상권의
+                                    위성 상권인 왕십리역을 보시죠.
                                 </h3>
                             </div>
                         </div>
                     </div>
                 </div>
                 <footer className={styles.footer}>
-                <div className={styles.footerContainer}>
-                    <div className={styles.footerSection}>
-                        <h4>회사 정보</h4>
-                        <ul>
-                            <li><a href="#">회사 소개</a></li>
-                            <li><a href="#">채용 정보</a></li>
-                            <li><a href="#">서비스 이용 약관</a></li>
-                        </ul>
+                    <div className={styles.footerContainer}>
+                        <div className={styles.footerSection}>
+                            <h4>회사 정보</h4>
+                            <ul>
+                                <li><a href="#">회사 소개</a></li>
+                                <li><a href="#">채용 정보</a></li>
+                                <li><a href="#">서비스 이용 약관</a></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </footer>
+                </footer>
             </div>
         </>
     )

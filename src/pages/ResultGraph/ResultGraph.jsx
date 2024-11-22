@@ -41,7 +41,7 @@ const ResultGraph = () => {
     { name: '30대 ~ 40대', value: 3, color: '#0088FE' },
     { name: '40대 ~ 50대', value: 2, color: '#00C49F' },
     { name: '50대 ~ 60대', value: 1, color: '#BA4C9D' },
-  ];
+  ]; 
 
   const COLORS = ['#FFBB28', '#0088FE', '#63B0E8', '#94C4DD'];
 
@@ -69,7 +69,7 @@ const ResultGraph = () => {
         <h3 className="result_text">상세 분석 결과</h3>
         <div className="graph_stick1_container">
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={barData}>
+            <BarChart data={barData}> {/* 데이터 불러오기 */} 
               <XAxis
                 dataKey="name"
                 tick={{ fontSize: 21, fontFamily: "Pretendard Variable", fontWeight: 500 }}
@@ -109,7 +109,7 @@ const ResultGraph = () => {
                 <PieChart>
                   <Legend layout="vertical" verticalAlign="top" align="top" />
                   <Pie
-                    data={pieData}
+                    data={pieData} //데이터 가져오기(백엔드 에서)
                     cx="50%"
                     cy="50%"
                     labelLine={false}
@@ -133,7 +133,7 @@ const ResultGraph = () => {
                 <PieChart>
                   <Legend layout="vertical" verticalAlign="top" align="top" />
                   <Pie
-                    data={agePieData}
+                    data={agePieData} //데이터 가져오기(백엔드 에서)
                     cx="50%"
                     cy="50%"
                     labelLine={false}

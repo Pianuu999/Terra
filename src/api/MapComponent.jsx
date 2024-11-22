@@ -77,8 +77,8 @@ export default function MapComponent() {
             container: mapContainer.current, // 지도 DOM 요소
             style: 'mapbox://styles/kgb4854/cm2xeuvps002q01oj8wpfham3', // 지도 스타일
             center: [126.978, 37.5665], // 초기 지도 중심 좌표 (서울)
-            zoom: 11, // 초기 줌 레벨
-            language: "ko" // 지도 언어 설정 (한국어)
+            zoom: 11.5, // 초기 줌 레벨
+            language: "ko", // 지도 언어 설정 (한국어)
         });
 
         // 지도 초기화 후 상태 업데이트

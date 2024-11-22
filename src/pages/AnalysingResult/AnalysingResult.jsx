@@ -4,7 +4,6 @@ import '../AnalysingResult/AnalysingResult.css';
 import item3 from '/images/Group24.png'
 
 const AnalysingResult = () => {
-
     const navigate = useNavigate();
 
     return (
@@ -14,7 +13,7 @@ const AnalysingResult = () => {
                 <p className="p2">님에게 최적화된 상권은</p>
             </div>
             <div className="Result">
-                <img src={item3} className="circleResult"/>
+                <img src={item3} className="circleResult" />
                 <p className="p3_01">먹자골목</p> {/* 분석결과 데이터 정보가져오기*/}
             </div>
             <button className="startBtn" onClick={() => navigate('/design')}>
