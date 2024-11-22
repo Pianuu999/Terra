@@ -65,6 +65,8 @@
 }
 
 .cardContent {
+    display: flex;
+    gap: 50px;
     color: #333;
     font-size: 16px;
     line-height: 1.5;
@@ -85,18 +87,15 @@
     display: flex;
     flex-direction: row;
     margin-bottom: 50px;
-    margin-top: 70px;
 }
 
 .profileTextContainer {
     display: flex;
     align-items: center;
-    margin-left: 13px;
-    margin-bottom: 50px;
 }
 
 .profileText {
-    font-size: 16px;
+    font-size: 14px;
     font-family: "Pretendard Variable";
     font-weight: normal;
 }
@@ -115,23 +114,39 @@
 
 .graph_stick1_container {
     width: 253px;
-    height: 214px;
+    height: auto;
+    overflow: visible !important;
+      
 }
 
-.jungbobogi1 {
-    margin-top: 100px;
+.jungbobogi0 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
     border-radius: 20px;
-    width: 376px;
-    height: 194px;
+    width: auto;
+    height: auto;
     background-color: #ffffff60;
     padding: 0 17px;
     animation: appear 1.5s ease-out, appear_from_bottom 1s ease-out;
     z-index: 2;
 }
 
+.jungbobogi1 {
+    border-radius: 20px;
+    width: 376px;
+    height: auto;
+    background-color: #ffffff60;
+    padding: 0 17px;
+    margin-top: 80px;
+    animation: appear 1.5s ease-out, appear_from_bottom 1s ease-out;
+    z-index: 2;
+}
+
 .jungbobogi2 {
     padding: 20px;
-    margin-top: 40px;
     border-radius: 20px;
     width: 376px;
     height: auto;
@@ -139,21 +154,22 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     animation: appear 1.5s ease-out, appear_from_bottom 1s ease-out;
-    z-index: 2;
+    z-index: 2; 
 }
-
 
 
 .recharts-surface {
   overflow: visible !important; /* 바 그래프가 감싸고 있는 클래스 밖으로 그려질수 있도록 */
 }
 
+
 .activityText1 {
     font-family: "Pretendard Variable";
     font-weight: 600;
     margin-top: 16px;
-    margin-left: 19px;
+    margin-bottom: 20px;
     text-align: center;
     color: rgb(34, 101, 194);
 }
@@ -168,7 +184,8 @@
 }
 
 .circleResult {
-    margin-top: 30px;
+    margin-top: 50px;
+    margin-bottom: 30px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -213,11 +230,13 @@
 }
 
 .minitext1 {
+    align-items: center;
+    align-content: center;
     margin-top: 20px;
     text-align: center;
     font-family: "Pretendard Variable";
     font-weight: 600px;
-    font-size: 20px;
+    font-size: 24px;
 }
 
 .minitext2 {
@@ -235,9 +254,18 @@
 }
 
 .genderBox {
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 60px;
+    width: 100%; 
     background-color: #F5F5F5;
-    border-radius: 12px;
+    border-radius: 12px; 
+}
+
+.recharts-default-legend {
+    padding-left: 30px !important;
 }
 
 .nextIconContainer {
@@ -268,6 +296,107 @@
     background-color: #F5F5F5;
     border-radius: 12px;
 }
+
+.lineChartContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 363px;
+    height: auto;
+    background-color: aliceblue;
+    border-radius: 13px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    box-shadow:  10px 10px 20px -11px rgba(174, 174, 192, 0.7);
+    animation: appear 1.5s ease-out, appear_from_bottom 1s ease-out;
+
+}
+
+.box1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 363px;
+    height: auto;
+    background-color: white;
+    border-radius: 13px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    box-shadow:  10px 10px 20px -11px rgba(174, 174, 192, 0.7);
+    animation: appear 1.5s ease-out, appear_from_bottom 1s ease-out;
+
+}
+
+.box2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 363px;
+    height: auto;
+    background-color: aliceblue;
+    border-radius: 13px;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    box-shadow:  10px 10px 20px -11px rgba(174, 174, 192, 0.7);
+    animation: appear 1.5s ease-out, appear_from_bottom 1s ease-out;
+
+}
+
+.box3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 363px;
+    height: auto;
+    background-color: white;
+    border-radius: 13px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    box-shadow:  10px 10px 20px -11px rgba(174, 174, 192, 0.7);
+    animation: appear 1.5s ease-out, appear_from_bottom 1s ease-out;
+}
+  
+.title {
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center; 
+    margin-bottom: 50px;
+}
+
+.text4 {
+    display: flex;
+    flex-direction: row;
+    gap: 7px;
+    font-size: 35px;
+    font-family: "Pretendard Variable";
+    font-weight: 400;
+    color: #FF6161;
+} 
+
+.text5 {
+    display: flex;
+    flex-direction: row;
+    gap: 7px;
+    font-size: 35px;
+    font-family: "Pretendard Variable";
+    font-weight: 400;
+    color: #6196ff;
+} 
+
+
 
 @keyframes appear{
     from {

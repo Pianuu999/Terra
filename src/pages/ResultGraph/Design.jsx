@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from '/images/logo_01.svg';
-import { ResponsiveContainer, BarChart, Bar, XAxis, LabelList, PieChart, Pie, Legend, Cell } from "recharts";
+import { ResponsiveContainer, LineChart, CartesianGrid, Line, BarChart, Bar, XAxis, LabelList, PieChart, Pie, Legend, Cell, YAxis, Tooltip } from "recharts";
 import sourceData from "../../Data/sourceData.json";
 import styles from '../ResultGraph/Design.module.css';
 
 const Design = () => {
-    const [isExpanded, setIsExpanded] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(false); //card
     const [barData, setBarData] = useState([]);
     const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ const Design = () => {
     useEffect(() => {
         if (sourceData && sourceData.length > 0) {
             const formattedData = sourceData
-                .map(item =>  ({
+                .map(item => ({
                     name: item.name,
                     uv: item.uv,
                     pv: item.pv,
@@ -51,6 +51,15 @@ const Design = () => {
         );
     };
 
+
+    {/* 매출액 데이터 가져오는 곳 2021 ~ 2024*/ }
+    const lineChartData = [
+        { name: "2021", pv: 4000 },
+        { name: "2022", pv: 3000 },
+        { name: "2023", pv: 2000 },
+        { name: "2024", pv: 2780 },
+    ];
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.background}>
@@ -77,15 +86,18 @@ const Design = () => {
                         </div>
                     </div>
 
-                    <div className={styles.graph_stick1_container}>
-                        <ResponsiveContainer width="100%" height={270}>
-                            <BarChart data={barData}>
-                                <XAxis dataKey="name" tick={{ fontSize: 21, fontFamily: "Pretendard Variable", fontWeight: 500 }} tickLine={false} />
-                                <Bar dataKey="uv" fill="#3182F6">
-                                    <LabelList dataKey="pv" position="top" style={{ fontSize: 14, fontWeight: 'bold', fill: 'black' }} />
-                                </Bar>
-                            </BarChart>
-                        </ResponsiveContainer>
+                    <div className={styles.jungbobogi0}>
+                        <h3 className={styles.activityText1}><span>강남구</span>의 추천 지역 Top 3</h3>
+                        <div className={styles.box}>
+                            <ResponsiveContainer width="67%" height={270}>
+                                <BarChart data={barData} margin={{ top: 30 }}>
+                                    <XAxis dataKey="name" tick={{ fontSize: 21, fontFamily: "Pretendard Variable", fontWeight: 500 }} tickLine={false} />
+                                    <Bar dataKey="uv" fill="#3182F6">
+                                        <LabelList dataKey="pv" position="top" style={{ fontSize: 14, fontWeight: 'bold', fill: 'black' }} />
+                                    </Bar>
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
                     </div>
 
                     <div className={styles.jungbobogi1}>
@@ -101,40 +113,67 @@ const Design = () => {
 
                     <div className={styles.jungbobogi2}>
                         <div className={styles.bell_Text}>
-                            <h3 className="activityText1">해당 지역 소비집계</h3>
+                            <h3 className={styles.activityText1}>해당 지역 소비집계</h3>
                         </div>
-                        <div className="ageBox">
-                            <div className={styles.minitextContainer}>
+                        <div className={styles.box2}>
+                            <div className="genderBox" style={{width: "100%"}}>
                                 <p className="minitext1"> 성별 별 소비 </p>
+                                <div className="pieChart" style={{width: "100%"}}>
+                                    <ResponsiveContainer width="100%" height={400}>
+                                        <PieChart fontSize={20}>
+                                            <Legend layout="vertical" verticalAlign="top" align="top" />
+                                            <Pie data={pieData} cx="50%" cy="50%" labelLine={false} label={renderCustomizedLabel} outerRadius={120} fill="#71C1D8" dataKey="value">
+                                                {pieData.map((entry, index) => (
+                                                    <Cell key={`cell-${index}`} fill={index === 0 ? "#ffafcc" : "#a2d2ff"} />
+                                                ))}
+                                            </Pie>
+                                        </PieChart>
+                                    </ResponsiveContainer>
+                                </div>
                             </div>
-                            <div className="pieChart">
-                                <ResponsiveContainer width="100%" height={400}>
-                                    <PieChart fontSize={20}>
-                                        <Legend layout="vertical" verticalAlign="top" align="top"/>
-                                        <Pie data={pieData} cx="50%" cy="50%" labelLine={false} label={renderCustomizedLabel} outerRadius={120} fill="#71C1D8" dataKey="value">
-                                            {agePieData.map((entry, index) => (
-                                                <Cell key={`cell-${index}`} fill={entry.color} />
-                                            ))}
-                                        </Pie>
-                                    </PieChart>
-                                </ResponsiveContainer>
+                            <div className="ageBox" style={{width: "100%"}}>
+                                <p className="minitext1"> 연령별 소비 </p>
+                                <div className="pieChart">
+                                    <ResponsiveContainer width="100%" height={400}>
+                                        <PieChart fontSize={20}>
+                                            <Legend layout="vertical" verticalAlign="top" align="top" />
+                                            <Pie data={agePieData} cx="50%" cy="50%" labelLine={false} label={renderCustomizedLabel} outerRadius={120} fill="#8884d8" dataKey="value">
+                                                {agePieData.map((entry, index) => (
+                                                    <Cell key={`cell-${index}`} fill={entry.color} />
+                                                ))}
+                                            </Pie>
+                                        </PieChart>
+                                    </ResponsiveContainer>
+                                </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div className="genderBox">
-                            <p className="minitext1"> 연령별 소비 </p>
-                            <div className="pieChart">
-                                <ResponsiveContainer width="100%" height={400}>
-                                    <PieChart fontSize={20}>
-                                        <Legend layout="vertical" verticalAlign="top" align="top" />
-                                        <Pie data={agePieData} cx="50%" cy="50%" labelLine={false} label={renderCustomizedLabel} outerRadius={120} fill="#8884d8" dataKey="value">
-                                            {agePieData.map((entry, index) => (
-                                                <Cell key={`cell-${index}`} fill={entry.color} />
-                                            ))}
-                                        </Pie>
-                                    </PieChart>
-                                </ResponsiveContainer>
-                            </div>
+                    {/* LineChart 추가 부분 */}
+                    <div className={styles.jungbobogi2} style={{ marginTop: '20px' }}>
+                        <h3 className={styles.activityText1}>해당 업종 연도별 매출액</h3>
+                        <div className={styles.box1}>
+                            <ResponsiveContainer width={330} height={300} style={{ marginTop: '26px', paddingRight: '20px' }}>
+                                <LineChart data={lineChartData} fontSize={13}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="name" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    <Line dataKey="pv" stroke="rgb(49, 130, 246)" name="매출액" strokeWidth={2} />
+                                </LineChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </div>
+                    <div className={styles.jungbobogi2} style={{ alignItems: 'center' }}>
+                        <h3 className={styles.activityText1}>해당 업종 결제 건수</h3>
+                        <div className={styles.box3}>
+                            <span className={styles.text4}> 67 <span style={{ color: 'black', fontSize: 26, alignContent: 'center', fontWeight: 500 }}>건</span></span>
+                        </div>
+                    </div>
+                    <div className={styles.jungbobogi2} style={{ alignItems: 'center' }}>
+                        <h3 className={styles.activityText1}>해당 업종 점포수</h3>
+                        <div className={styles.box3}>
+                            <span className={styles.text5}> 13 <span style={{ color: 'black', fontSize: 26, alignContent: 'center', fontWeight: 500 }}>개</span></span>
                         </div>
                     </div>
                 </div>
