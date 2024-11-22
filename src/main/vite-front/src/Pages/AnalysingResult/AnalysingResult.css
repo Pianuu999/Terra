@@ -1,0 +1,90 @@
+.wrapper_Result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ }
+ 
+.rowText {
+    display: flex;
+    justify-content: center;
+    margin-top: 235px;
+}
+ 
+.rowText p {
+    font-family: 'PretendardVariable', sans-serif;
+    font-size: 29px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 20px;
+}
+ 
+.Result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    position: relative; /* 자식의 절대 위치 기준 */
+    width: 284px; /* .circleResult 크기에 맞춤 */
+    height: 284px;
+    animation: bounce2 1.5s ease-in-out infinite both; /* 바운스 애니메이션 */
+}
+
+.circleResult {
+    width: 100%; /* 부모의 크기를 따름 */
+    height: 100%;
+}
+ 
+.p3 {
+    position: absolute;
+    top: 54%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    font-family: "Pretendard Variable";
+    font-size: 36px;
+    font-weight: 700;
+    z-index: 1; /* 이미지 위에 표시 */
+}
+
+.startBtn {
+    margin-top: 213px;
+    width: 351px;
+    height: 50px;
+    border-radius: 12px;
+    background: #3182F6;
+    border: none;
+    cursor: pointer;
+}
+
+.startBtn a {
+    text-decoration: none;
+    color: #FFF;
+    text-align: center;
+    font-family: "Pretendard Variable";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.p1 {
+    color: #787878;
+    text-align: center;
+    font-family: "Pretendard Variable";
+    font-size: 29px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+@keyframes bounce2 {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }

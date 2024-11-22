@@ -1,0 +1,64 @@
+/* Analysing.css */
+
+.backgroundAnalysng {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100vh;
+  background-image: url('../../Assets/Image/analysingBackground3.jpg');
+  background-size: cover;
+}
+
+.circle {
+  position: relative;
+  width: 300px; /* 이미지 크기에 맞게 조정 */
+  height: 300px; /* 이미지 크기에 맞게 조정 */
+}
+
+.rotating {
+  width: 100%;
+  height: 100%;
+  animation: rotate 4s linear infinite; /* 회전 애니메이션 */
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 164px; /* 아이콘 크기 */
+  height: 164px; /* 아이콘 크기 */
+  z-index: 10;
+  animation: bounce 1.5s ease-in-out infinite both; /* 바운스 애니메이션 */
+}
+
+.ing {
+  margin-top: 60px;
+  font-size: 30px;
+  font-family: "Pretendard Variable";
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.imgLogo {
+  position: absolute;
+  bottom: 55px;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1); /* 중앙 고정, 크기만 변경 */
+  }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+ 

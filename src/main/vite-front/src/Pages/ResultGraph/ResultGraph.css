@@ -1,0 +1,202 @@
+
+.resultGraph_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: visible;
+    padding: 10px;
+    height: auto;
+}
+
+.result_text {
+    margin-top: 10px;
+    margin-bottom: 100px;
+    color: rgb(63, 63, 63);
+    text-align: center;
+    font-family: "Pretendard Variable";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.graph_stick1_container {
+    display: flex;
+    width: 253px;
+    height: 214px;
+    text-align: center;
+    animation: appear 1.5s ease-out, appear_from_bottom 1s ease-out;
+}
+
+.jungbobogi1 {
+    margin-top: 100px;
+    border-radius: 20px;
+    width: 376px;
+    height: 194px;
+    background-color: #ffffff60;
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.39);
+    padding: 0 17px;
+    animation: appear 1.5s ease-out, appear_from_bottom 1s ease-out;
+    z-index: 2;
+}
+
+.jungbobogi2 {
+    padding: 20px;
+    margin-top: 40px;
+    border-radius: 20px;
+    width: 376px;
+    height: auto;
+    background-color: #ffffff;
+    box-shadow: 0px 8px 10px 2px rgba(0,0,0,0.39);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: appear 1.5s ease-out, appear_from_bottom 1s ease-out;
+    z-index: 2;
+}
+
+
+
+.recharts-surface {
+  overflow: visible !important; /* 바 그래프가 감싸고 있는 클래스 밖으로 그려질수 있도록 */
+}
+
+.activityText1 {
+    font-family: "Pretendard Variable";
+    font-weight: 600;
+    margin-top: 16px;
+    margin-left: 19px;
+    text-align: center;
+    color: rgb(34, 101, 194);
+}
+
+.activityText2 {
+    font-family: "Pretendard Variable";
+    font-weight: 500;
+    margin-top: 16px;
+    margin-left: 19px;
+    text-align: center;
+    color: rgb(78, 78, 78);
+}
+
+.circleResult {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 10px;
+}
+
+.circles {
+    background-color: rgb(49, 130, 246);
+    border: none solid 1px;
+    border-radius: 50px;
+    height: 78px;
+    width: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circles p {
+    color: #F5F5F5;
+    font-family: "Pretendard Variable";
+    font-size: large;
+    font-weight: 500;
+    
+}
+
+.backIcon {
+    margin-top: 18px;
+    margin-left: 18px;
+}
+
+.bell_Text {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.pieChart {
+    margin-top: 30px;
+    width: 100%;
+    height: 400px;
+}
+
+.minitext1 {
+    margin-top: 20px;
+    text-align: center;
+    font-family: "Pretendard Variable";
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.minitext2 {
+    text-align: center;
+    font-family: "Pretendard Variable";
+    font-weight: 500;
+}
+
+.ageBox{
+    padding: 20px;
+    background: #F5F5F5;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+}
+
+.genderBox {
+    padding: 20px;
+    background-color: #F5F5F5;
+    border-radius: 12px;
+}
+
+.nextIconContainer {
+    display: flex;
+    flex-direction: row;
+    z-index: 1px;
+    position: absolute;
+    gap: 290px;
+    margin-left: -25px;
+}
+
+.jungbobogi3 {
+    padding: 20px;
+    margin-top: 40px;
+    border-radius: 20px;
+    width: 376px;
+    height: auto;
+    background-color: #ffffff;
+    box-shadow: 0px 8px 10px 2px rgba(0,0,0,0.39);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: appear 1.5s ease-out, appear_from_bottom 1s ease-out;
+}
+
+.competitorBox {
+    padding: 20px;
+    background-color: #F5F5F5;
+    border-radius: 12px;
+}
+
+@keyframes appear{
+    from {
+      opacity: 0;
+    }
+  
+    to{
+      opacity: 1;
+    }
+  }
+  
+  @keyframes appear_from_bottom{
+    0%{
+      transform: translateY(150px);
+      opacity: 0;
+    }
+  
+    100%{
+      opacity: 1;
+    }
+  }
