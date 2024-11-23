@@ -1,64 +1,54 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom"; 
+import { useNavigate, useLocation } from "react-router-dom";
 import logo from '/images/logo_01.svg';
 import { ResponsiveContainer, LineChart, CartesianGrid, Line, BarChart, Bar, XAxis, LabelList, PieChart, Pie, Legend, Cell, YAxis, Tooltip } from "recharts";
+import sourceData from "../../Data/sourceData.json";
 import styles from '../ResultGraph/Design.module.css';
 
 const Design = () => {
-    const [isExpanded, setIsExpanded] = useState(false);
-    const [barData, setBarData] = useState([]);
-    const [pieData, setPieData] = useState([]);
-    const [agePieData, setAgePieData] = useState([]);
-    const [lineChartData, setLineChartData] = useState([]);
-    const [totalSalesCount, setTotalSalesCount] = useState(0);  // 매출 건수를 관리할 상태 추가
-    const [totalStoreCount, setTotalStoreCount] = useState(0);  // 점포 수를 관리할 상태 추가
+    const [isExpanded, setIsExpanded] = useState(false); // card
     const navigate = useNavigate();
 
     const location = useLocation();
-    const { selectedRegions, selectedCategory, selectedSubCategory, recommendations } = location.state || {};
+
+    const { selectedRegions, selectedCategory, selectedSubCategory, recommendations } = location.state || {};  // 전달된 state 객체
+    console.log(recommendations);
+
+    const [barData, setBarData] = useState([]);
+
+    const useData = recommendations[0];
+
+    useEffect(() => {
+        if (recommendations && Array.isArray(recommendations)) {
+            // selectedRegions이 배열이라면 각 항목을 매핑하여 필요한 데이터를 추출
+            const formattedData = recommendations.map((region, index) => ({
+                name: region.administrativeDistrictName,  // 구 이름
+                uv: index === 0 ? 200 : index === 1 ? 150 : 100,  // 3개 항목에 대해 각기 다른 uv 값 지정
+            }));
+
+            // 바 차트 데이터 상태 업데이트
+            setBarData(formattedData);
+        }
+    }, [recommendations]);  // selectedRegions이 변경될 때마다 useEffect 실행
 
     const handleCardClick = () => setIsExpanded(prev => !prev);
 
-    useEffect(() => {
-        if (recommendations && recommendations.length > 0) {
-            // 행정동별 추천 데이터 처리
-            const formattedBarData = recommendations.map(item => ({
-                name: item.administrativeDistrictName,
-                uv: item.totalScore,  // 예시로 총점수를 uv로 사용
-                pv: item.salesCount    // 예시로 매출건수 등
-            }));
+    const pieData = [
+        { name: '여성', value: useData.femaleSalesCount },
+        { name: '남성', value: useData.maleSalesCount }
+    ];
 
-            const formattedPieData = recommendations.map(item => ({
-                name: item.administrativeDistrictName,
-                male: item.maleSalesCount,  // 남성 매출
-                female: item.femaleSalesCount,  // 여성 매출
-            }));
-
-            const formattedAgePieData = recommendations.map(item => ({
-                name: item.administrativeDistrictName,
-                ageGroups: item.ageGroupSales  // 연령대별 매출
-            }));
-
-            const formattedLineChartData = recommendations.map(item => ({
-                name: item.administrativeDistrictName,
-                pv: item.annualSales   // 연도별 매출 데이터
-            }));
-
-            // 매출 건수와 점포 수 계산 (전체 합산)
-            const totalSales = recommendations.reduce((sum, item) => sum + item.salesCount, 0);
-            const totalStores = recommendations.reduce((sum, item) => sum + item.storeCount, 0); // 점포수 계산
-
-            setBarData(formattedBarData);
-            setPieData(formattedPieData);
-            setAgePieData(formattedAgePieData);
-            setLineChartData(formattedLineChartData);
-            setTotalSalesCount(totalSales);  // 매출 건수 상태 업데이트
-            setTotalStoreCount(totalStores);  // 점포 수 상태 업데이트
-        }
-    }, [recommendations]);
+    const agePieData = [
+        { name: '10대', value: useData.salesAge10, color: '#71C1D8' },
+        { name: '20대', value: useData.salesAge20, color: '#51A2E7' },
+        { name: '30대', value: useData.salesAge30, color: '#A1F0C1' },
+        { name: '40대', value: useData.salesAge40, color: '#99B1A4' },
+        { name: '50대', value: useData.salesAge50, color: '#E0C060' },
+        { name: '60대', value: useData.salesAge60, color: '#E0C060' },
+    ];
 
     const RADIAN = Math.PI / 180;
-    
+
     const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
         const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
         const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -69,6 +59,13 @@ const Design = () => {
             </text>
         );
     };
+
+    const lineChartData = [
+        { name: "2021", pv: 621000000 },
+        { name: "2022", pv: 521780000 },
+        { name: "2023", pv: useData.data20232},
+        { name: "2024", pv: useData.data20242},
+    ];
 
     return (
         <div className={styles.wrapper}>
@@ -82,9 +79,9 @@ const Design = () => {
                 </div>
             </div>
 
-            <div className={`${styles.card} ${isExpanded ? styles.expanded : ""}`}>
+            <div className={`${styles.card} ${isExpanded ? styles.expanded : ""}`} onClick={handleCardClick}>
                 <div className={styles.toggler}>
-                    <svg onClick={handleCardClick} width="71" height="8" viewBox="0 0 71 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="71" height="8" viewBox="0 0 71 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="71" height="8" rx="4" fill="#D9D9D9" />
                     </svg>
                 </div>
@@ -96,74 +93,87 @@ const Design = () => {
                         </div>
                     </div>
 
-                    <div className={styles.jungbobogi0}>
-                        <h3 className={styles.activityText1}><span>{selectedRegions ? selectedRegions.join(", ") : "강남구"}</span>의 추천 지역 Top 3</h3>
-                        <div className={styles.box}>
-                            <ResponsiveContainer width="67%" height={270}>
-                                <BarChart data={barData} margin={{ top: 30 }}>
-                                    <XAxis dataKey="name" tick={{ fontSize: 21, fontFamily: "Pretendard Variable", fontWeight: 500 }} tickLine={false} />
-                                    <Bar dataKey="uv" fill="#3182F6">
-                                        <LabelList dataKey="pv" position="top" style={{ fontSize: 14, fontWeight: 'bold', fill: 'black' }} />
-                                    </Bar>
-                                </BarChart>
-                            </ResponsiveContainer>
-                        </div>
-                    </div>
-
-                    <div className={styles.jungbobogi2}>
-                        <div className={styles.bell_Text}>
-                            <h3 className={styles.activityText1}>해당 지역 소비집계</h3>
-                        </div>
-                        <div className={styles.box2}>
-                            <div className="genderBox" style={{ width: "100%" }}>
-                                <p className="minitext1"> 성별 별 소비 </p>
-                                <div className="pieChart" style={{ width: "100%" }}>
-                                    <ResponsiveContainer width="100%" height={400}>
-                                        <PieChart fontSize={20}>
-                                            <Legend layout="vertical" verticalAlign="top" align="top" />
-                                            <Pie data={pieData} cx="50%" cy="50%" labelLine={false} label={renderCustomizedLabel} outerRadius={120} fill="#71C1D8" dataKey="male">
-                                                {pieData.map((entry, index) => (
-                                                    <Cell key={`cell-${index}`} fill={index === 0 ? "#ffafcc" : "#a2d2ff"} />
-                                                ))}
-                                            </Pie>
-                                        </PieChart>
-                                    </ResponsiveContainer>
-                                </div>
-                            </div>
-                            <div className="ageBox" style={{ width: "100%" }}>
-                                <p className="minitext1"> 연령별 소비 </p>
-                                <div className="pieChart">
-                                    <ResponsiveContainer width="100%" height={400}>
-                                        <PieChart fontSize={20}>
-                                            <Legend layout="vertical" verticalAlign="top" align="top" />
-                                            <Pie data={agePieData} cx="50%" cy="50%" labelLine={false} label={renderCustomizedLabel} outerRadius={120} fill="#8884d8" dataKey="value">
-                                                {agePieData.map((entry, index) => (
-                                                    <Cell key={`cell-${index}`} fill={entry.color} />
-                                                ))}
-                                            </Pie>
-                                        </PieChart>
-                                    </ResponsiveContainer>
-                                </div>
+                    
+                        <div className={styles.jungbobogi0}>
+                            <h3 className={styles.activityText1}><span style={{color: '#fca481', fontWeight: 800}}>{selectedRegions}</span>의 추천 지역 Top 3</h3>
+                            <div className={styles.box}>
+                                <ResponsiveContainer width="100%" height={270}>
+                                    <BarChart data={barData} margin={{ top: 30 }}>
+                                        <XAxis dataKey="name" tick={{ fontSize: 21, fontFamily: "Pretendard Variable", fontWeight: 500 }} tickLine={false} />
+                                        <Bar dataKey="uv" fill="#3182F6">
+                                            <LabelList dataKey="pv" position="top" style={{ fontSize: 14, fontWeight: 'bold', fill: 'black' }} />
+                                        </Bar>
+                                    </BarChart>
+                                </ResponsiveContainer>
                             </div>
                         </div>
-                    </div>
-
-                    <div className={styles.jungbobogi2} style={{ alignItems: 'center' }}>
-                        <h3 className={styles.activityText1}>해당 업종 결제 건수</h3>
-                        <div className={styles.box3}>
-                            <span className={styles.text4}> {totalSalesCount} <span style={{ color: 'black', fontSize: 26, fontWeight: 500 }}>건</span></span>
+                        <div className={styles.jungbobogi2}>
+                            <div className={styles.bell_Text}>
+                                <h3 className={styles.activityText1}>해당 지역 소비집계</h3>
+                            </div>
+                            <div className={styles.box2}>
+                                <div className="genderBox" style={{ width: "100%" }}>
+                                    <p className="minitext1"> 성별 별 소비 </p>
+                                    <div className="pieChart" style={{ width: "100%" }}>
+                                        <ResponsiveContainer width="100%" height={400}>
+                                            <PieChart fontSize={20}>
+                                                <Legend layout="vertical" verticalAlign="top" align="top" />
+                                                <Pie data={pieData} cx="50%" cy="50%" labelLine={false} label={renderCustomizedLabel} outerRadius={120} fill="#71C1D8" dataKey="value">
+                                                    {pieData.map((entry, index) => (
+                                                        <Cell key={`cell-${index}`} fill={index === 0 ? "#ffafcc" : "#a2d2ff"} />
+                                                    ))}
+                                                </Pie>
+                                            </PieChart>
+                                        </ResponsiveContainer>
+                                    </div>
+                                </div>
+                                <div className="ageBox" style={{ width: "100%" }}>
+                                    <p className="minitext1"> 연령별 소비 </p>
+                                    <div className="pieChart">
+                                        <ResponsiveContainer width="100%" height={400}>
+                                            <PieChart fontSize={20}>
+                                                <Legend layout="vertical" verticalAlign="top" align="top" />
+                                                <Pie data={agePieData} cx="50%" cy="50%" labelLine={false} label={renderCustomizedLabel} outerRadius={120} fill="#8884d8" dataKey="value">
+                                                    {agePieData.map((entry, index) => (
+                                                        <Cell key={`cell-${index}`} fill={entry.color} />
+                                                    ))}
+                                                </Pie>
+                                            </PieChart>
+                                        </ResponsiveContainer>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-
-                    <div className={styles.jungbobogi2} style={{ alignItems: 'center' }}>
-                        <h3 className={styles.activityText1}>해당 업종 점포수</h3>
-                        <div className={styles.box3}>
-                            <span className={styles.text5}> {totalStoreCount} <span style={{ color: 'black', fontSize: 26, fontWeight: 500 }}>개</span></span>
+                        <div className={styles.jungbobogi2} style={{ marginTop: '20px' }}>
+                            <h3 className={styles.activityText1}>해당 업종 연도별 매출액</h3>
+                            <div className={styles.box1}>
+                                <ResponsiveContainer width="100%" height={300} style={{ marginTop: '26px', paddingRight: '20px' }}>
+                                    <LineChart data={lineChartData} fontSize={13}>
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <XAxis dataKey="name" />
+                                        <YAxis fontSize={10} fontWeight={600}/>
+                                        <Tooltip />
+                                        <Line dataKey="pv" stroke="rgb(49, 130, 246)" name="매출액" strokeWidth={2} />
+                                    </LineChart>
+                                </ResponsiveContainer>
+                            </div>
+                        </div>
+                        <div className={styles.jungbobogi2} style={{ alignItems: 'center' }}>
+                            <h3 className={styles.activityText1}>해당 업종 결제 건수</h3>
+                            <div className={styles.box3}>
+                                <span className={styles.text4}> {Math.floor(useData.avgSales)} <span style={{ color: 'black', fontSize: 26, alignContent: 'center', fontWeight: 500 }}>건</span></span>
+                            </div>
+                        </div>
+                        <div className={styles.jungbobogi2} style={{ alignItems: 'center' }}>
+                            <h3 className={styles.activityText1}><sapn style={{color: '#fca481'}}>{useData.serviceIndustryCodeName}</sapn> 점포수</h3>
+                            <div className={styles.box3}>
+                                <span className={styles.text5}> {useData.similarIndustryStoreCount} <span style={{ color: 'black', fontSize: 26, alignContent: 'center', fontWeight: 500 }}>개</span></span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+       
     );
 };
 

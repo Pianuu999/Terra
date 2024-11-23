@@ -18,61 +18,61 @@ export default function AnalysisPage() {
             value: "food",
             label: "음식점 / 식음료",
             subcategories: [
-                { value: "korean", label: "한식음식점" },
-                { value: "japanese", label: "일식음식점" },
-                { value: "chinese", label: "중식음식점" },
-                { value: "western", label: "양식음식점" },
-                { value: "friedchicken", label: "치킨전문점" },
-                { value: "fastfood", label: "패스트푸드점" },
-                { value: "cafe", label: "카페" },
-                { value: "snack", label: "분식전문점" },
-                { value: "banchan", label: "반찬가게" },
-                { value: "pub", label: "호프 / 간이주점" },
-                { value: "convenience", label: "편의점" },
+                { value: "한식음식점", label: "한식음식점" },
+                { value: "일식음식점", label: "일식음식점" },
+                { value: "중식음식점", label: "중식음식점" },
+                { value: "양식음식점", label: "양식음식점" },
+                { value: "치킨전문점", label: "치킨전문점" },
+                { value: "패스트푸드점", label: "패스트푸드점" },
+                { value: "카페", label: "카페" },
+                { value: "분식전문점", label: "분식전문점" },
+                { value: "반찬가게", label: "반찬가게" },
+                { value: "호프 / 간이주점", label: "호프 / 간이주점" },
+                { value: "편의점", label: "편의점" },
             ],
         },
         {
             value: "retail",
             label: "소매업 / 상점",
             subcategories: [
-                { value: "grocery", label: "슈퍼마켓" },
-                { value: "stationery", label: "문구" },
-                { value: "bookstore", label: "서적" },
-                { value: "clothing", label: "일반의류" },
-                { value: "shoes", label: "신발" },
-                { value: "jewelry", label: "시계 및 귀금속" },
-                { value: "electronics", label: "가전제품" },
-                { value: "furniture", label: "가구" },
-                { value: "seafood", label: "수산물판매" },
-                { value: "meat", label: "육류판매" },
-                { value: "accessory", label: "가방" },
-                { value: "glasses", label: "안경" },
+                { value: "슈퍼마켓", label: "슈퍼마켓" },
+                { value: "문구", label: "문구" },
+                { value: "서적", label: "서적" },
+                { value: "일반의류", label: "일반의류" },
+                { value: "신발", label: "신발" },
+                { value: "시계 및 귀금속", label: "시계 및 귀금속" },
+                { value: "가전제품", label: "가전제품" },
+                { value: "가구", label: "가구" },
+                { value: "수산물판매", label: "수산물판매" },
+                { value: "육류판매", label: "육류판매" },
+                { value: "가방", label: "가방" },
+                { value: "안경", label: "안경" },
             ],
         },
         {
             value: "entertainment",
             label: "오락 / 여가",
             subcategories: [
-                { value: "gaming", label: "PC방" },
-                { value: "karaoke", label: "노래방" },
-                { value: "billiards", label: "당구장" },
-                { value: "golf", label: "골프연습장" },
+                { value: "PC방", label: "PC방" },
+                { value: "노래방", label: "노래방" },
+                { value: "당구장", label: "당구장" },
+                { value: "골프연습장", label: "골프연습장" },
             ],
         },
         {
             value: "beauty_health",
             label: "미용 / 건강",
             subcategories: [
-                { value: "salon", label: "미용실" },
-                { value: "nail", label: "네일숍" },
-                { value: "skincare", label: "피부관리실" },
+                { value: "미용실", label: "미용실" },
+                { value: "네일숍", label: "네일숍" },
+                { value: "피부관리실", label: "피부관리실" },
             ],
         },
         {
             value: "laundry_service",
             label: "세탁 / 서비스",
             subcategories: [
-                { value: "laundry", label: "세탁소" },
+                { value: "세탁소", label: "세탁소" },
             ],
         },
     ];
@@ -85,7 +85,7 @@ export default function AnalysisPage() {
     useEffect(() => {
         // data.json에서 지역 정보를 가져와서 상태에 저장
         const regionData = data.DATA.map(item => ({
-            value: item.signgu_cd,
+            value: item.signgu_nm,
             label: item.signgu_nm
         }));
         setRegions(regionData);
@@ -122,12 +122,19 @@ export default function AnalysisPage() {
         }
 
         try {
+            // regionsParam과 selectedSubCategory를 로그로 찍어봄
+            const regionsParam = selectedRegions.join(',');
+            console.log('Regions:', regionsParam);
+            console.log('SubCategory:', selectedSubCategory);
+    
             // 백엔드 API에 GET 요청
-            const response = await fetch(`/api/terra/recommendations?district=${selectedRegions.join(",")}&serviceIndustryCodeName=${selectedSubCategory}`);
+            const response = await fetch(`http://localhost:8080/api/terra/recommendations?district=${regionsParam}&serviceIndustryCodeName=${selectedSubCategory}`);
+            
+            // 응답 상태 확인
             if (response.ok) {
                 const data = await response.json();
+                console.log('API Response:', data);  // 응답 데이터 로그 찍기
                 setRecommendations(data);  // 추천 데이터를 상태에 저장
-                // 분석 페이지로 이동
                 navigate('/Analysing', {
                     state: {
                         selectedRegions,
@@ -240,4 +247,4 @@ export default function AnalysisPage() {
             </div>
         </div>
     );
-}
+};

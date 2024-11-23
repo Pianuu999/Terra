@@ -316,6 +316,8 @@
     border-radius: 13px;
     padding-top: 30px;
     padding-bottom: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
     box-shadow:  10px 10px 20px -11px rgba(174, 174, 192, 0.7);
     animation: appear 1.5s ease-out, appear_from_bottom 1s ease-out;
 
@@ -332,6 +334,7 @@
     border-radius: 13px;
     padding-top: 30px;
     padding-bottom: 30px;
+    padding-left: 10px;
     box-shadow:  10px 10px 20px -11px rgba(174, 174, 192, 0.7);
     animation: appear 1.5s ease-out, appear_from_bottom 1s ease-out;
 
@@ -396,6 +399,11 @@
     font-weight: 400;
     color: #6196ff;
 } 
+
+.section {
+    background-color: #d9d7d7;
+    padding: 30px;
+}
 
 
 

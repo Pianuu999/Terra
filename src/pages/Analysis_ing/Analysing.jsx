@@ -1,37 +1,50 @@
-import React, { useEffect } from "react";  // useEffect를 추가로 import합니다.
-import { useLocation, useNavigate } from "react-router-dom";
-import item from '/images/Group30.svg';
-import icon from '/images/turn.svg';
-import './Analysing.css';  // CSS 파일 추가
-import logo from '/images/logo_01.svg';
+import React, { useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import '../AnalysingResult/AnalysingResult.css';
+import item3 from '/images/Group24.png';
 
-const Analysing = () => {
-
+const AnalysingResult = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { selectedRegions, selectedCategory, selectedSubCategory } = location.state || {};
 
-    useEffect(() => {
-        // 로딩 화면을 4초 동안 보여준 후, 결과 페이지로 이동
-        const timer = setTimeout(() => {
-            navigate('/AnalysingResult', {
-                state: { selectedRegions, selectedCategory, selectedSubCategory }
-            });
-        }, 4000); // 4초 후 분석 결과 페이지로 이동
+    // location.state에서 필요한 데이터 추출
+    const { selectedRegions, selectedCategory, selectedSubCategory, recommendations } = location.state || {}; 
 
-        return () => clearTimeout(timer); // 컴포넌트가 언마운트되면 타이머를 클리어
-    }, [navigate, selectedRegions, selectedCategory, selectedSubCategory]);
+    // recommendations가 없거나 selectedRegions가 없으면 로딩 화면 표시
+    if (!selectedRegions || !recommendations || recommendations.length === 0) {
+        return <div>데이터를 불러오는 데 실패했습니다.</div>;
+    }
+
+    // 첫 번째 추천 지역 데이터
+    const firstRecommendation = recommendations[0];
+
+    // Design 페이지로 이동할 함수
+    const goToDesignPage = () => {
+        navigate('/Design', {
+            state: {
+                selectedRegions,
+                selectedCategory,  // selectedCategory가 안쪽으로 포함되어야 할 것 같습니다
+                selectedSubCategory,
+                recommendations, // recommendations를 바로 전달
+            }
+        });
+    };
 
     return (
-        <div className="backgroundAnalysng">
-            <div className="circle">
-                <img src={icon} alt="back" className="rotating" />
-                <img src={item} alt="icon" className="icon" />
+        <div className="wrapper_Result">
+            <div className="rowText">
+                <p className="p1">고객</p> {/*사용자 이름 가져오기 */}
+                <p className="p2">님에게 최적화된 상권은</p>
             </div>
-            <h3 className="ing">분석중</h3>
-            <img src={logo} className="imgLogo" />
+            <div className="Result">
+                <img src={item3} className="circleResult" alt="result" />
+                <p className="p3_01">{firstRecommendation.administrativeDistrictName}</p> {/* 첫 번째 추천 지역 이름 */}
+            </div>
+            <button className="startBtn" onClick={goToDesignPage} style={{fontSize: 20, color: "white", fontFamily: "Pretendard Variable"}}>
+                상세 보고서 보러가기
+            </button>
         </div>
     );
 }
 
-export default Analysing;
+export default AnalysingResult;

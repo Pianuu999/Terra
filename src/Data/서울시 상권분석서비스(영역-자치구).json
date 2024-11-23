@@ -1,7 +1,7 @@
 {
 "DESCRIPTION" : {"SIGNGU_CD":"자치구_코드","YDNTS_VALUE":"와이좌표_값","XCNTS_VALUE":"엑스좌표_값","SIGNGU_NM":"자치구_명","RELM_AR":"영역_면적"},
 "DATA" : [
-{"signgu_cd":"11110","relm_ar":23990643,"ydnts_value":455039,"xcnts_value":197997,"signgu_nm":"종로구"},
+{"signgu_cd":"종로구","relm_ar":23990643,"ydnts_value":455039,"xcnts_value":197997,"signgu_nm":"종로구"},
 {"signgu_cd":"11140","relm_ar":9990317,"ydnts_value":451178,"xcnts_value":199639,"signgu_nm":"중구"},
 {"signgu_cd":"11170","relm_ar":21892688,"ydnts_value":447985,"xcnts_value":198224,"signgu_nm":"용산구"},
 {"signgu_cd":"11200","relm_ar":16817016,"ydnts_value":450168,"xcnts_value":203628,"signgu_nm":"성동구"},
