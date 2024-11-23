@@ -1,0 +1,270 @@
+.wrapper {
+    height: auto;
+}
+
+.banner {
+    background-image: url("/images/trendBanner.jpg");
+    background-size: cover;
+    height: 382px;
+}
+
+.logo {
+    position: absolute;
+    top: 22px;
+    left: 26px;
+}
+
+.textContainer {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 300px;
+    left: 18px;
+}
+
+.text1 {
+    color: #FFF;
+    font-family: "Pretendard Variable";
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.text2 {
+    color: #FFF;
+    font-family: "Pretendard Variable";
+    font-size: 34px;
+    font-weight: 600;
+}
+
+.titleContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 62px;
+}
+
+.mediumTitle {
+    color: #000;
+    font-family: "Pretendard Variable";
+    font-size: 27px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 10px;
+}
+
+.mediumTitleMini {
+    color: #000;
+    font-family: "Pretendard Variable";
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-left: -150px;
+}
+
+.profileContainerWrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.profileContainer {
+    margin-top: 54px;
+    display: flex;
+    align-items: center;
+    width: 368px;
+    height: 199px;
+    background-color: #F5F5F5;
+}
+
+.profile {
+    margin-left: 14px;
+}
+
+.profileInform {
+    margin-left: 20px;
+    list-style: none;
+    line-height: 27px;
+    color: #000;
+    font-family: "Pretendard Variable";
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.contentWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* 수평 중앙에 자식 요소 배치 */
+    margin: 0 auto;
+}
+
+.contentContainer {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.contextContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    height: 81px;
+    width: 282px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    line-height: 50px;
+}
+
+.context {
+    color: #000;
+    font-family: "Pretendard Variable";
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 30px;
+    text-align: left;
+}
+
+.keywordContainer {
+    width: 368px;
+    height: 128px;
+    background-color: #F5F5F5;
+}
+
+.keyword {
+    position: relative;
+    top: 16px;
+    left: 18px;
+    list-style: none;
+    text-align: start;
+    color: #000;
+    font-family: "Pretendard Variable";
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal
+}
+
+.keyword li {
+    display: flex;
+    /* 가로 방향으로 이미지와 텍스트 배치 */
+    align-items: center;
+    /* 세로 정렬 */
+    gap: 20px;
+    /* 이미지와 텍스트 사이의 간격 */
+    margin-bottom: 10px;
+    /* 리스트 아이템 간 간격 (선택 사항) */
+}
+
+.keyword img {
+    width: 16px;
+    /* 이미지 크기 조정 (선택 사항) */
+    height: 16px;
+}
+
+.miniTitleContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+}
+
+.miniTitle {
+    margin-top: 2px;
+    color: #000;
+    font-family: "Pretendard Variable";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+}
+
+.miniTitleContainer2 {
+    text-align: left;
+    margin-top: 39px;
+}
+
+.miniTitle2 {
+    font-weight: 300px;
+}
+
+.graph {
+    display: block;
+    margin-top: 50px;
+}
+
+.contextContainer2 {
+    height: auto;
+    width: 282px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    
+}
+
+.footer {
+    background: #F5F5F5;
+    width: 100%;
+    height: 180px;
+}
+
+.footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid #ddd;
+}
+
+.footerContainer {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footerSection {
+    flex: 1;
+    min-width: 200px;
+    margin: 10px;
+    text-align: left;
+}
+
+.footerSection h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.footerSection ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footerSection ul li {
+    margin-bottom: 8px;
+}
+
+.footerSection ul li a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 14px;
+}
+
+.footerSection ul li a:hover {
+    text-decoration: underline;
+}
+
+.footerBottom {
+    background-color: #e9ecef;
+    font-size: 14px;
+    color: #6c757d;
+}

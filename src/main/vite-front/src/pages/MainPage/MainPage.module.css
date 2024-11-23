@@ -1,0 +1,40 @@
+.background {
+    background-image: url("/images/background_01.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.item_container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.h3_01 {
+    color: #404040;
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.button_01 {
+    margin-top: 35px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(to right, #3182f6, #8561c0);
+    padding: 18px 20px;
+    border-radius: 18px;
+    box-shadow: -5px -5px 5px rgb(255, 255, 255), 5px 5px 10px 3px rgba(94, 104, 121, 0.300);
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.button_01:hover {
+    transform: translateY(-4px);
+    box-shadow: -5px -5px 5px rgb(255, 255, 255), 5px 5px 10px 3px rgba(94, 104, 121, 0.300);
+}
