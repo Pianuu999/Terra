@@ -80,6 +80,7 @@ export default function AnalysisPage() {
     // 지역 데이터를 불러오는 부분
     const [regions, setRegions] = useState([]);
     const [selectedRegions, setSelectedRegions] = useState([]);
+    const [recommendations, setRecommendations] = useState([]);  // 추천 데이터 상태 추가
 
     useEffect(() => {
         // data.json에서 지역 정보를 가져와서 상태에 저장
@@ -90,7 +91,6 @@ export default function AnalysisPage() {
         setRegions(regionData);
     }, []);
 
-    // 구 선택 처리
     const handleRegionChange = (event) => {
         const selected = event.target.value;
         if (!selectedRegions.includes(selected) && selectedRegions.length < 3) {
@@ -98,7 +98,6 @@ export default function AnalysisPage() {
         }
     };
 
-    // 구 삭제 처리
     const removeRegion = (region) => {
         setSelectedRegions(selectedRegions.filter((r) => r !== region));
     };
@@ -115,19 +114,35 @@ export default function AnalysisPage() {
     // 선택된 카테고리 데이터를 가져옵니다.
     const selectedCategoryData = categories.find((category) => category.value === selectedCategory);
 
-    const handleAnalysisStart = () => {
+    // 분석 시작 버튼 클릭시 API 호출
+    const handleAnalysisStart = async () => {
         if (selectedRegions.length === 0 || !selectedCategory || !selectedSubCategory) {
             alert("모든 항목을 선택해주세요!");
             return;
         }
 
-        navigate('/Analysing', {
-            state: {
-                selectedRegions, // 선택된 지역
-                selectedCategory, // 선택된 대분류
-                selectedSubCategory // 선택된 소분류
+        try {
+            // 백엔드 API에 GET 요청
+            const response = await fetch(`/api/terra/recommendations?district=${selectedRegions.join(",")}&serviceIndustryCodeName=${selectedSubCategory}`);
+            if (response.ok) {
+                const data = await response.json();
+                setRecommendations(data);  // 추천 데이터를 상태에 저장
+                // 분석 페이지로 이동
+                navigate('/Analysing', {
+                    state: {
+                        selectedRegions,
+                        selectedCategory,
+                        selectedSubCategory,
+                        recommendations: data, // 추천 데이터도 전달
+                    }
+                });
+            } else {
+                alert("추천 데이터를 불러오는 데 실패했습니다.");
             }
-        });
+        } catch (error) {
+            console.error("API 호출 에러:", error);
+            alert("서버 오류가 발생했습니다.");
+        }
     };
 
     return (
@@ -224,6 +239,5 @@ export default function AnalysisPage() {
                 </div>
             </div>
         </div>
-
     );
-};
+}
