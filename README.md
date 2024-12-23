@@ -23,5 +23,8 @@
 <img src="https://github.com/user-attachments/assets/60a75223-0d1b-4abe-9ab2-05d9d4506329" width="20%"></img>
 <img src="https://github.com/user-attachments/assets/d5ffc1a3-5636-44dd-988b-2878d897555c" width="20%"></img>
 <img src="https://github.com/user-attachments/assets/efb72106-2c8a-41df-b3c1-3fde9e23fcbf" width="20%"></img>
+<img src="https://github.com/user-attachments/assets/bfdd963a-f2ab-480d-9bfd-6c6456c1ed5c" width="20%"></img>
+<img src="https://github.com/user-attachments/assets/16ba598e-c1b3-45b0-af97-b67d6d1833c2" width="20%"></img>
+<img src="https://github.com/user-attachments/assets/381c8420-5927-4685-b9a5-e98fe6482bee" width="20%"></img>
 </p>
 <img src="https://capsule-render.vercel.app/api?type=waving&color=BDBDC8&height=150&section=footer" />
