@@ -13,8 +13,8 @@
   <img src="https://img.shields.io/badge/figma-%23F24E1E.svg?&style=for-the-badge&logo=figma&logoColor=white" />
 </p>
 
-<h2>1. HOME 페이지</h2> 
-<details><summary>미리보기
+
+<details><summary><h2>1. intro</h2> 
 </summary>
 <p align="center">
 <img src="https://github.com/user-attachments/assets/5b764aad-5fc6-4fb7-9246-6e3e8cde3c2d" width="20%"></img>
