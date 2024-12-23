@@ -40,6 +40,9 @@
 </p>
 </details>
 <h2>3. 상권 추천</h2> 
+
+<details><summary> 사용자 입력에 맞는 행정동을 추천해준다
+</summary>
 <p align="center">
 <img src="https://github.com/user-attachments/assets/914a0d95-84be-4113-965c-e2d3b8fe9e3b" width="20%"></img>
 <img src="https://github.com/user-attachments/assets/d5c37365-f955-4f1c-940d-fb6248bdce2b" width="20%"></img>
@@ -50,13 +53,13 @@
 <img src="https://github.com/user-attachments/assets/16ba598e-c1b3-45b0-af97-b67d6d1833c2" width="20%"></img>
 <img src="https://github.com/user-attachments/assets/381c8420-5927-4685-b9a5-e98fe6482bee" width="20%"></img>
 </p>
-<p align="center">
-<img src="https://github.com/user-attachments/assets/0b0d4154-b60f-4d2d-8110-e807aa704462" width="20%"></img>
-<img src="https://github.com/user-attachments/assets/6e64aa62-998e-417d-8802-2e9f826a7b07" width="20%"></img>
-<img src="https://github.com/user-attachments/assets/2460f0e7-ca5f-4a96-a803-29d906163e27" width="20%"></img>
-</p>
+</details>
 <h2>4. 최신 트렌드</h2> 
+
+<details><summary> 최신 상권 트렌드를 게시판을 통해 알아볼 수 있다
+</summary>
 <p align="center">
 <img src="https://github.com/user-attachments/assets/c08332eb-a78c-42c6-ad3f-c442cf63d405" width="20%"></img>
 </p>
+</details>
 <img src="https://capsule-render.vercel.app/api?type=waving&color=BDBDC8&height=150&section=footer" />
