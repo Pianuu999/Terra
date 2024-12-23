@@ -14,7 +14,7 @@
 </p>
 
 <h2>1. 시작페이지</h2>
-<details><summary> 
+<details><summary> 상권분석하기 버튼을 통해 메인페이지로 이동할 수 있다.
 </summary>
 <p align="center">
 <img src="https://github.com/user-attachments/assets/5b764aad-5fc6-4fb7-9246-6e3e8cde3c2d" width="20%"></img>
