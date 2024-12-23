@@ -27,4 +27,8 @@
 <img src="https://github.com/user-attachments/assets/16ba598e-c1b3-45b0-af97-b67d6d1833c2" width="20%"></img>
 <img src="https://github.com/user-attachments/assets/381c8420-5927-4685-b9a5-e98fe6482bee" width="20%"></img>
 </p>
+<h2>4. 최신 트렌드</h2> 
+<p align="center">
+<img src="https://github.com/user-attachments/assets/c08332eb-a78c-42c6-ad3f-c442cf63d405" width="20%"></img>
+</p>
 <img src="https://capsule-render.vercel.app/api?type=waving&color=BDBDC8&height=150&section=footer" />
