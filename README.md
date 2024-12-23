@@ -22,15 +22,23 @@
 </details>
 
 <h2>2. 유동인구 현황</h2> 
+
+<details><summary> 유동인구 현황을 한눈에 파악 가능!!
+</summary>
 <p align="center">
 <img src="https://github.com/user-attachments/assets/9975d7ab-3b31-4858-85a6-499f15ac9ff4" width="20%"></img>
 </p>
+</details>
 <h2>3. 상권 현황</h2> 
+
+<details><summary> 상권 현황을 세부적인 내용까지 확인할 수 있다
+</summary>
 <p align="center">
 <img src="https://github.com/user-attachments/assets/0b0d4154-b60f-4d2d-8110-e807aa704462" width="20%"></img>
 <img src="https://github.com/user-attachments/assets/6e64aa62-998e-417d-8802-2e9f826a7b07" width="20%"></img>
 <img src="https://github.com/user-attachments/assets/2460f0e7-ca5f-4a96-a803-29d906163e27" width="20%"></img>
 </p>
+</details>
 <h2>3. 상권 추천</h2> 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/914a0d95-84be-4113-965c-e2d3b8fe9e3b" width="20%"></img>
@@ -41,6 +49,11 @@
 <img src="https://github.com/user-attachments/assets/bfdd963a-f2ab-480d-9bfd-6c6456c1ed5c" width="20%"></img>
 <img src="https://github.com/user-attachments/assets/16ba598e-c1b3-45b0-af97-b67d6d1833c2" width="20%"></img>
 <img src="https://github.com/user-attachments/assets/381c8420-5927-4685-b9a5-e98fe6482bee" width="20%"></img>
+</p>
+<p align="center">
+<img src="https://github.com/user-attachments/assets/0b0d4154-b60f-4d2d-8110-e807aa704462" width="20%"></img>
+<img src="https://github.com/user-attachments/assets/6e64aa62-998e-417d-8802-2e9f826a7b07" width="20%"></img>
+<img src="https://github.com/user-attachments/assets/2460f0e7-ca5f-4a96-a803-29d906163e27" width="20%"></img>
 </p>
 <h2>4. 최신 트렌드</h2> 
 <p align="center">
