@@ -1,11 +1,11 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=BDBDC8&height=150&section=header" />
 <h1>TERRA 상권추천서비스</h1>
 </br>
-<img src="https://img.shields.io/badge/MariaDB-#003545?style=flat&logo=MariaDB&logoColor=white"/>
-<img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"/>
-<img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"/>
-<img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"/>
-<img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"/>
+<p>
+  <img src="https://img.shields.io/badge/MariaDB-#003545?style=flat&logo=MariaDB&logoColor=white"/>
+  <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"/>
+</p>
+
 <h2>1. HOME 페이지</h2> 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/5b764aad-5fc6-4fb7-9246-6e3e8cde3c2d" width="20%"></img>
