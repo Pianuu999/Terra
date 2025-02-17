@@ -39,7 +39,7 @@
 <img src="https://github.com/user-attachments/assets/2460f0e7-ca5f-4a96-a803-29d906163e27" width="20%"></img>
 </p>
 </details>
-<h2>3. 상권 추천</h2> 
+<h2>4. 상권 추천</h2> 
 
 <details><summary> 사용자 입력에 맞는 행정동을 추천해준다
 </summary>
