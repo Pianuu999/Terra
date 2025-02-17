@@ -54,7 +54,7 @@
 <img src="https://github.com/user-attachments/assets/381c8420-5927-4685-b9a5-e98fe6482bee" width="20%"></img>
 </p>
 </details>
-<h2>4. 최신 트렌드</h2> 
+<h2>5. 최신 트렌드</h2> 
 
 <details><summary> 최신 상권 트렌드를 게시판을 통해 알아볼 수 있다
 </summary>
